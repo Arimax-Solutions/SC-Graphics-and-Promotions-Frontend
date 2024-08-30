@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Sample data for categories
 const categories = [
   {
     name: 'Promotional Pens Printing',

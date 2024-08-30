@@ -22,7 +22,7 @@ export default function BoxSx() {
       <Box
         sx={{
           width: '100%',
-          height: 'auto', // Set height to auto for responsiveness
+          height: 'auto', 
           borderRadius: 1,
           bgcolor: 'primary.main',
           '&:hover': {
@@ -30,11 +30,11 @@ export default function BoxSx() {
           },
           display: 'grid',
           gridTemplateColumns: {
-            xs: '1fr', // 1 column on extra-small screens (mobile)
-            sm: 'repeat(3, 1fr)', // 3 columns on small screens and above
+            xs: '1fr', 
+            sm: 'repeat(3, 1fr)', 
           },
-          gap: 2, // Gap between the grid items
-          padding: 2, // Padding inside the Box
+          gap: 2, 
+          padding: 2, 
         }}
       >
         {/* First Box */}
@@ -42,17 +42,17 @@ export default function BoxSx() {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'flex-start', // Align items to the left
+            justifyContent: 'flex-start', 
             height: '100%',
             color: 'white',
-            padding: 1, // Padding inside each Box
+            padding: 1, 
           }}
         >
-          <CiGift className="text-blue-900 mr-4" size={40} /> {/* Icon with margin-right */}
+          <CiGift className="text-blue-900 mr-4" size={40} /> 
           <Box
             sx={{
               display: 'flex',
-              flexDirection: 'column', // Stack text content vertically
+              flexDirection: 'column', 
             }}
           >
             <h1 className={h1Class}>FREE CONCEPT AND DESIGNING</h1>
@@ -65,17 +65,17 @@ export default function BoxSx() {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'flex-start', // Align items to the left
+            justifyContent: 'flex-start', 
             height: '100%',
             color: 'white',
-            padding: 1, // Padding inside each Box
+            padding: 1, 
           }}
         >
-          <MdOutlineAddLocationAlt className="text-blue-900 mr-4" size={40} /> {/* Icon with margin-right */}
+          <MdOutlineAddLocationAlt className="text-blue-900 mr-4" size={40} /> 
           <Box
             sx={{
               display: 'flex',
-              flexDirection: 'column', // Stack text content vertically
+              flexDirection: 'column', 
             }}
           >
             <h1 className={h1Class}>VISIT AND SEE PREVIOUS WORK</h1>
@@ -88,17 +88,17 @@ export default function BoxSx() {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'flex-start', // Align items to the left
+            justifyContent: 'flex-start', 
             height: '100%',
             color: 'white',
-            padding: 1, // Padding inside each Box
+            padding: 1, 
           }}
         >
-          <Ri24HoursLine className="text-blue-900 mr-4" size={40} /> {/* Icon with margin-right */}
+          <Ri24HoursLine className="text-blue-900 mr-4" size={40} /> 
           <Box
             sx={{
               display: 'flex',
-              flexDirection: 'column', // Stack text content vertically
+              flexDirection: 'column', 
             }}
           >
             <h1 className={h1Class}>ONLINE SUPPORT 24/7</h1>
