@@ -1,16 +1,18 @@
 import React from 'react';
+import prom1 from '../assets/prom1.jpeg'
+import prom2 from '../assets/prom2.jpeg'
+import prom3 from '../assets/prom3.jpeg'
+import prom4 from '../assets/prom4.jpeg'
+import prom5 from '../assets/trop.jpeg'
+
+
 
 const photos = [
-  'https://via.placeholder.com/150',
-  'https://via.placeholder.com/150',
-  'https://via.placeholder.com/150',
-  'https://via.placeholder.com/150',
-  'https://via.placeholder.com/150',
-  'https://via.placeholder.com/150',
-  'https://via.placeholder.com/150',
-  'https://via.placeholder.com/150',
-  'https://via.placeholder.com/150',
-  'https://via.placeholder.com/150'
+  prom1,
+  prom2,
+  prom3,
+  prom4,
+  prom5,
 ];
 
 const PhotoList = () => {
@@ -21,7 +23,7 @@ const PhotoList = () => {
           key={index}
           src={photo}
           alt={`Photo ${index}`}
-          className="min-w-60 h-60 object-cover rounded-lg border border-gray-300"
+          className="min-w-96 h-96 object-cover rounded-lg border border-gray-300"
         />
       ))}
     </div>

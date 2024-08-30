@@ -24,7 +24,7 @@ const Footer = () => {
     <footer className="bg-blue-950 text-white py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row">
-          {/* Company Information */}
+          {/* Company Infor */}
           <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left mb-8 md:mb-0">
             <Link to="/" className="mb-4">
               <img src={logo} alt="Logo" className="w-12 h-12 object-contain" />
@@ -47,7 +47,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Categories and Useful Links */}
+          {/* Categories */}
           <div className="flex-1 flex flex-col md:flex-row justify-center space-y-8 md:space-y-0 md:space-x-8">
             {/* Categories */}
             <div className="flex flex-col">
