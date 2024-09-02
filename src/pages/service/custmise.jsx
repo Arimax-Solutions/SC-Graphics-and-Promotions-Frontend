@@ -13,12 +13,11 @@ const images = [
   img2,
   img3,
   img4,
-
 ];
 
 function App() {
   return (
-    <div className="px-4 md:px-24 py-24 ">
+    <div className="px-4 sm:px-6 md:px-12 lg:px-24 py-12 md:py-24">
       <Header
         title="Customized Items"
         imageSrc={prom4}
@@ -29,18 +28,19 @@ function App() {
             The shop's website showcases a portfolio of diverse projects, demonstrating expertise in transforming
              ideas into visually compelling designs that capture the essence of your brand."
       />
-      <div className='pt-6 '>
-        <h1 className='font-serif font-bold text-2xl pb-4'>Service Details</h1>
-        <p className='font-sans font-medium leading-relaxed' >SC Graphics and Promotions offers customized items like unique gifts, elegant wedding cards, personalized name boards, custom mugs, and stylish photo 
-frames. Our pricing is competitive and based on item complexity, with detailed quotes provided upfront. Most items are completed and shipped within 7-10 
-business days, with expedited options available. We provide up to two rounds of revisions, with additional revisions available for a fee. A 50% deposit is 
-required to start, with the balance due upon completion before delivery. We accept various secure payment methods and ensure strict confidentiality of 
-client information. For more details or to place an order, visit our website or contact us directly.</p>
-
+      <div className='pt-6'>
+        <h1 className='font-serif font-bold text-xl md:text-2xl pb-4'>Service Details</h1>
+        <p className='font-sans font-medium leading-relaxed text-sm md:text-base'>
+          SC Graphics and Promotions offers customized items like unique gifts, elegant wedding cards, personalized name boards, custom mugs, and stylish photo 
+          frames. Our pricing is competitive and based on item complexity, with detailed quotes provided upfront. Most items are completed and shipped within 7-10 
+          business days, with expedited options available. We provide up to two rounds of revisions, with additional revisions available for a fee. A 50% deposit is 
+          required to start, with the balance due upon completion before delivery. We accept various secure payment methods and ensure strict confidentiality of 
+          client information. For more details or to place an order, visit our website or contact us directly.
+        </p>
       </div>
-
-  
-      <ImageGallery images={images} />
+      <div className="pt-8">
+        <ImageGallery images={images} />
+      </div>
     </div>
   );
 }

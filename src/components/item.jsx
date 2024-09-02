@@ -1,51 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
-import { styled } from '@mui/material/styles';
-
-const CustomCard = styled(Card)(({ theme }) => ({
-  borderRadius: 5,
-  boxShadow: `0px 4px 8px 0px rgba(207, 201, 0, 0.6)`, 
-  width: '100%', 
-}));
 
 const Item = ({ img, price, text, productId }) => {
   if (!productId) {
     console.error("Product ID is missing for the Item component.");
-    return null; 
+    return null;
   }
 
   return (
-    <Link to={`/product/${productId}`}>
-      <CustomCard>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            image={img}
-            alt={text}
-            sx={{
-              width: '100%',
-              height: 200,
-              objectFit: 'cover',
-            }}
+    <Link to={`/product/${productId}`} className="block transform transition-transform duration-300 hover:scale-105">
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="relative">
+          <img 
+            src={img} 
+            alt={text} 
+            className="w-full h-48 sm:h-56 object-cover"
           />
-          <CardContent>
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-              <Typography gutterBottom component="div" className="flex-1">
-                <h1 className="text-lg sm:text-xl font-mono font-bold">{price}</h1>
-                {text}
-              </Typography>
-              <div className="mt-2 sm:mt-0 bg-green-300 text-white rounded-full px-4 py-1 text-center border border-white">
-                <h1 className="text-green-600 font-serif text-sm sm:text-base">Buy</h1>
-              </div>
-            </div>
-          </CardContent>
-        </CardActionArea>
-      </CustomCard>
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span className="text-white text-lg font-semibold text-center px-2">{text}</span>
+          </div>
+        </div>
+        <div className="p-4">
+          <h3 className="text-pink-600 text-xl font-bold text-center">{price}</h3>
+          <p className="text-gray-700 text-center mt-2 h-12 overflow-hidden text-ellipsis">
+            {text}
+          </p>
+        </div>
+      </div>
     </Link>
   );
 };
