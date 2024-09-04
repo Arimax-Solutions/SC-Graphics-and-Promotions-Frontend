@@ -12,9 +12,15 @@ const AdminPage = () => {
     setIsAddingNew(false);
   };
 
-  const handleDelete = (id) => {
-    const updatedList = productList.filter(product => product.id !== id);
-    setProductList(updatedList);
+  const handleDelete = async (id) => {
+    try {
+      const response = await axios.delete(`http://localhost:8080/api/v1/products/${id}`);
+      console.log(response)
+      const updatedList = productList.filter(product => product.id !== id);
+      setProductList(updatedList);
+    } catch (error) {
+      console.error('Error deleting product:', error);
+    }
   };
 
   const handleAddNew = () => {
