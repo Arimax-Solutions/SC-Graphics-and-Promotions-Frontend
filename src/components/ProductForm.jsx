@@ -1,96 +1,125 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import InputFileUpload from './upload'; 
 
-const ProductFormModal = ({ product, onSubmit, onCancel }) => {
-  const [formData, setFormData] = useState({
-    id: '',
-    title: '',
-    price: '',
-    description: '',
-    details: [],
-    img: '',
-  });
-
-  useEffect(() => {
-    if (product) {
-      setFormData(product);
-    } else {
-      setFormData({
-        id: '',
-        title: '',
-        price: '',
-        description: '',
-        details: [],
-        img: '',
-      });
+const ProductForm = ({ product, onSubmit, onCancel }) => {
+  const [formData, setFormData] = useState(
+    product || {
+      id: '',
+      img: '',
+      title: '',
+      price: '',
+      description: '',
+      details: [],
     }
-  }, [product]);
+  );
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleDetailChange = (index, key, value) => {
+    const newDetails = [...formData.details];
+    newDetails[index][key] = value;
+    setFormData({ ...formData, details: newDetails });
+  };
+
+  const handleAddDetail = () => {
+    setFormData({
+      ...formData,
+      details: [...formData.details, { label: '', value: '' }],
+    });
+  };
+
+  const handleImageUpload = (imageUrl) => {
+    setFormData({ ...formData, img: imageUrl });
+  };
+
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h3 className="text-lg font-semibold mb-4">{product ? 'Edit Product' : 'Add New Product'}</h3>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-sm font-medium">Title</label>
-            <input
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium">Price</label>
-            <input
-              type="text"
-              name="price"
-              value={formData.price}
-              onChange={handleChange}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium">Description</label>
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-              required
-            />
-          </div>
-          <div className="flex justify-end mt-6">
-            <button
-              type="button"
-              onClick={onCancel}
-              className="bg-gray-500 text-white px-4 py-2 rounded-md mr-2"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md"
-            >
-              {product ? 'Update' : 'Add'}
-            </button>
-          </div>
-        </form>
-      </div>
+    <div className="product-form mt-8 p-6 bg-gray-100 rounded-lg shadow-md">
+      <h2 className="text-xl font-semibold mb-4">{product ? 'Edit Product' : 'Add New Product'}</h2>
+      <form onSubmit={handleFormSubmit}>
+        <label className="block mb-2">
+          Image:
+          <InputFileUpload onUploadComplete={handleImageUpload} />
+        </label>
+        <label className="block mb-2">
+          Title:
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+          />
+        </label>
+        <label className="block mb-2">
+          Price:
+          <input
+            type="text"
+            name="price"
+            value={formData.price}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+          />
+        </label>
+        <label className="block mb-2">
+          Description:
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+          />
+        </label>
+        <div className="details-section mt-4">
+          <h3 className="text-lg font-medium mb-2">Details</h3>
+          {formData.details.map((detail, index) => (
+            <div key={index} className="flex justify-between mb-2">
+              <input
+                type="text"
+                value={detail.label}
+                onChange={(e) => handleDetailChange(index, 'label', e.target.value)}
+                placeholder="Label"
+                className="w-1/2 p-2 border border-gray-300 rounded-lg mr-2"
+              />
+              <input
+                type="text"
+                value={detail.value}
+                onChange={(e) => handleDetailChange(index, 'value', e.target.value)}
+                placeholder="Value"
+                className="w-1/2 p-2 border border-gray-300 rounded-lg"
+              />
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={handleAddDetail}
+            className="mt-2 text-blue-500 hover:underline"
+          >
+            Add Detail
+          </button>
+        </div>
+        <button
+          type="submit"
+          className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg mr-2"
+        >
+          Save
+        </button>
+        <button
+          type="button"
+          onClick={onCancel}
+          className="mt-4 bg-gray-500 text-white px-4 py-2 rounded-lg"
+        >
+          Cancel
+        </button>
+      </form>
     </div>
   );
 };
 
-export default ProductFormModal;
+export default ProductForm;

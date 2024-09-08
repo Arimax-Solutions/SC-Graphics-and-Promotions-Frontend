@@ -1,4 +1,3 @@
-// src/App.js
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/navbar';
 import Home from './pages/home';
@@ -13,39 +12,40 @@ import Lacer from './pages/service/lacer';
 import Key from './pages/service/key';
 import Cust from './pages/service/custmise';
 import Tropy from './pages/service/tropy';
-import SearchResults from './components/serchresult'
+import SearchResults from './components/serchresult';
 import Admin from './pages/admin';
-
-
-
-import './index.css';
-import Footer from './components/footer1'
+import Footer from './components/footer1';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { CubeIcon } from '@heroicons/react/16/solid';
 
+import './index.css';
 
 const App = () => {
   return (
     <Router>
       <Navbar />
-      <div className="mt-16">
+      <div className="">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shoping />} />
           <Route path="/aboutus" element={<About />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/contact" element={<Admin/>} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/grapic" element={<Grapic />} />
           <Route path="/lacer" element={<Lacer />} />
           <Route path="/keytags" element={<Key />} />
           <Route path="/tropy" element={<Tropy />} />
-          <Route path="/custmise" element={<Cust  />} />
+          <Route path="/custmise" element={<Cust />} />
           <Route path="/product/:productId" element={<SingleItem />} />
           <Route path="/search" element={<SearchResults />} />
+
+
+
         </Routes>
       </div>
-      <Footer/>
+      <Footer />
     </Router>
   );
 };

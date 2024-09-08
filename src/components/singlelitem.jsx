@@ -1,4 +1,3 @@
-// src/pages/SingleItemPage.js
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { products } from '../data/product';
@@ -21,7 +20,7 @@ const SingleItemPage = () => {
             <img
               src={product.img}
               alt={product.title}
-              className="w-96 h-96 object-cover rounded-md mb-4"
+              className="w-full h-auto object-cover rounded-md mb-4"
             />
           </div>
         </div>
@@ -39,10 +38,12 @@ const SingleItemPage = () => {
               <span className="text-3xl font-bold text-red-600">{product.price}</span>
             </div>
             
-            <div className="flex items-center space-x-4 mb-6">
-              <button className="flex items-center bg-blue-800 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-900 transition duration-300">
-                <FaPhoneAlt className="mr-2" /> Contact Us
-              </button>
+            <div className="flex flex-wrap items-center space-x-4 mb-6">
+              <a href="tel:0715359284" className="no-underline">
+                <button className="flex items-center bg-blue-800 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-900 transition duration-300">
+                  <FaPhoneAlt className="mr-2" /> Contact Us
+                </button>
+              </a>
               <button className="flex items-center bg-orange-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-orange-700 transition duration-300">
                 <FaBox className="mr-2" /> Order Now
               </button>
