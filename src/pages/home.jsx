@@ -65,12 +65,12 @@ const Home = () => {
         <ThemeProvider />
       </div>
       
-      <div className="flex flex-col lg:flex-row m-4 px-4 lg:px-0">
+      <div className="flex flex-col lg:flex-row m-4 px-0 lg:px-0">
         <div className="hidden lg:block lg:w-1/4 lg:mr-6 mb-6 lg:mb-0 flex justify-center lg:justify-start">
           <BrowseCategories />
         </div>
 
-        <div className="lg:w-3/4 lg:pl-6 lg:pr-6">
+        <div className="lg:w-3/4 ">
           <h1 className="text-2xl font-bold mb-4">POPULAR PRODUCTS</h1>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {Object.values(products).map(product => (
@@ -93,10 +93,12 @@ const Home = () => {
 
       <h1 className="text-center text-3xl">Your Vision, Our Expertise  —  Let's Connect Today!</h1>
       <div className="flex items-center justify-center h-20">
-        <Button className="text-center" variant="contained" disableElevation>
-          <LuPhoneCall className="mr-2" />
-          Contact Us
-        </Button>
+      <a href="tel:0715359284" className="no-underline">
+      <Button className="text-center" variant="contained" disableElevation>
+        <LuPhoneCall className="mr-2" />
+        Contact Us
+      </Button>
+    </a>
       </div>
     </>
   );
