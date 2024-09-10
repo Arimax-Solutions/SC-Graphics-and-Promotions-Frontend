@@ -2,15 +2,21 @@ import React from 'react';
 import Gall1 from '../assets/gall1.png'
 import Gall2 from '../assets/gall2.png'
 import Gall3 from '../assets/gall3.png'
+import Gall4 from '../assets/gra1.png'
+import Gall5 from '../assets/key1.png'
+import Gall6 from '../assets/lac1.png'
+import Gall7 from '../assets/trop1.png'
+
 
 const images = [
 
-  Gall1,
-  Gall2,
   Gall3,
-  Gall1,
   Gall2,
-  Gall3,
+  Gall1,
+  Gall4,
+  Gall5,
+  Gall6,
+  Gall7
 
 ];
 
@@ -67,6 +73,7 @@ const Gallery = () => {
           </div>
         </div>
       </div>
+      
     </div>
   );
 };

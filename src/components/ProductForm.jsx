@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import InputFileUpload from './upload'; 
+import InputFileUpload from './upload';
+
+// Mock data for categories and subcategories
+const categories = {
+  "Laser Works": ["Laser Cutting", "Laser Engraving", "Laser Marking"],
+  "Key Tags": ["Wooden", "Acrylic"],
+  "Magnet Tags": ["Customized Key tags", "Unique Key tags"],
+  "Name Boards": ["Interior Name Boards", "Exterior Name Boards"],
+  "Gift Items": ["Photo Frames", "Mugs"],
+  "Customized Items": ["Wedding Cards", "Ornaments"],
+  "Trophy": ["Wooden Trophy", "Brass Trophy", "Acrylic Trophy"]
+};
 
 const ProductForm = ({ product, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState(
@@ -10,11 +21,26 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
       price: '',
       description: '',
       details: [],
+      category: '', // New field for category
+      subcategory: '' // New field for subcategory
     }
   );
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+    setFormData({
+      ...formData,
+      category: selectedCategory,
+      subcategory: '' // Reset subcategory when category changes
+    });
+  };
+
+  const handleSubcategoryChange = (e) => {
+    setFormData({ ...formData, subcategory: e.target.value });
   };
 
   const handleDetailChange = (index, key, value) => {
@@ -76,6 +102,46 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
             className="w-full p-2 border border-gray-300 rounded-lg"
           />
         </label>
+
+        {/* Category Selection */}
+        <label className="block mb-2">
+          Category:
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleCategoryChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+          >
+            <option value="">Select Category</option>
+            {Object.keys(categories).map((category, index) => (
+              <option key={index} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        {/* Subcategory Selection */}
+        {formData.category && (
+          <label className="block mb-2">
+            Subcategory:
+            <select
+              name="subcategory"
+              value={formData.subcategory}
+              onChange={handleSubcategoryChange}
+              className="w-full p-2 border border-gray-300 rounded-lg"
+            >
+              <option value="">Select Subcategory</option>
+              {categories[formData.category].map((subcategory, index) => (
+                <option key={index} value={subcategory}>
+                  {subcategory}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
+
+        {/* Details Section */}
         <div className="details-section mt-4">
           <h3 className="text-lg font-medium mb-2">Details</h3>
           {formData.details.map((detail, index) => (
@@ -104,6 +170,7 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
             Add Detail
           </button>
         </div>
+
         <button
           type="submit"
           className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg mr-2"

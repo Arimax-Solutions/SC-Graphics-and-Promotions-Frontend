@@ -2,65 +2,160 @@ import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 const categories = [
-  { name: 'All', icon: '🛒' },
-  { name: 'Kitchen Organizers', icon: '🧑‍🍳' },
-  { name: 'Unisex\'s Key Holders', icon: '🔑' },
-  { name: 'Phone Docks & Stands', icon: '📱' },
-  { name: 'Unisex Fashion Earrings', icon: '🧝‍♂️' },
-  { name: 'Stators', icon: '' },
-  { name: 'Home Improvement & Lighting', icon: '🔧' },
-  { name: 'Home Appliances', icon: '🏠' },
-  { name: 'Automotive & Motorcycle', icon: '🚗' },
-  { name: 'Luggages & Bags', icon: '🧳' },
-  { name: 'Shoes', icon: '👟' },
-  { name: 'Special Occasion Costume', icon: '🎭' },
-  { name: 'Women\'s Clothing', icon: '👗' }
+  {
+    name: 'Laser Works',
+  },
+  {
+    name: 'Key Tags',
+  },
+  {
+    name: 'Magnet Tags',
+  },
+  {
+    name: 'Name Boards',
+  },
+  {
+    name: 'Gift Items',
+  },
+  {
+    name: 'Customized Items',
+  },
+  {
+    name: 'Trophy',
+  },
 ];
+
+const subcategories = {
+  'Laser Works': ['Laser Cutting', 'Laser Engraving', 'Laser Marking'],
+  'Key Tags': [
+    { name: 'Wooden', subcategories: ['Customized Key tags', 'Unique Key tags'] },
+    { name: 'Acrylic', subcategories: ['Customized Key tags', 'Unique Key tags'] },
+  ],
+  'Magnet Tags': ['Customized Key tags', 'Unique Key tags'],
+  'Name Boards': [
+    {
+      name: 'Interior Name Boards',
+      subcategories: ['Treated Mahogany Wood', 'MDF Board', 'Eco Board'],
+    },
+    {
+      name: 'Exterior Name Boards',
+      subcategories: ['Treated Mahogany Wood', 'Eco Board'],
+    },
+  ],
+  'Gift Items': ['Photo Frames', 'Mugs'],
+  'Customized Items': ['Wedding Cards', 'Ornaments'],
+  Trophy: ['Wooden Trophy', 'Brass Trophy', 'Acrylic Trophy'],
+};
 
 const CategoryMenu = ({ onCategorySelect }) => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState('All Categories');
+  const [selectedSubcategory, setSelectedSubcategory] = useState(null);
 
   const handleCategorySelect = (categoryName) => {
     setSelectedCategory(categoryName);
+    setSelectedSubcategory(null); // Reset subcategory when selecting a new category
     onCategorySelect(categoryName);
   };
 
+  const handleSubcategorySelect = (subcategoryName) => {
+    setSelectedSubcategory(subcategoryName);
+    onCategorySelect(subcategoryName);
+  };
+
   return (
-    <div className="relative p-4">
+    <div className="relative p-6">
       {isMobile ? (
-        // Mobile Layout
-        <div className="bg-white shadow-lg rounded-lg flex overflow-x-scroll space-x-4 p-3">
+        // Mobile Layout with Horizontal Scroll for Categories
+        <div className="flex overflow-x-auto space-x-4 scrollbar-hide">
+          <div
+            className={`min-w-[120px] bg-gradient-to-r from-gray-400 to-gray-600 rounded-lg p-4 text-white font-semibold text-sm cursor-pointer transition-all transform hover:scale-105 ${
+              selectedCategory === 'All Categories' ? 'ring-2 ring-blue-300' : ''
+            }`}
+            onClick={() => handleCategorySelect('All Categories')}
+          >
+            All Categories
+          </div>
           {categories.map((category, index) => (
-            <div 
-              key={index} 
-              className={`flex items-center justify-center text-gray-800 cursor-pointer transition duration-200 ease-in-out transform p-2 rounded-full whitespace-nowrap ${
-                selectedCategory === category.name ? 'bg-blue-500 text-white' : 'hover:scale-105 hover:bg-gray-200'
+            <div
+              key={index}
+              className={`min-w-[120px] bg-gradient-to-r from-green-400 to-blue-500 rounded-lg p-4 text-white font-semibold text-sm cursor-pointer transition-all transform hover:scale-105 ${
+                selectedCategory === category.name ? 'ring-2 ring-blue-300' : ''
               }`}
               onClick={() => handleCategorySelect(category.name)}
             >
-              <span className="text-lg">{category.icon}</span>
-              <span className="text-sm font-medium ml-2">{category.name}</span>
+              {category.name}
             </div>
           ))}
         </div>
       ) : (
-        // Desktop Layout
-        <div className="bg-white shadow-lg rounded-lg p-3 w-64">
-          <ul className="space-y-2">
-            {categories.map((category, index) => (
-              <li 
-                key={index} 
-                className={`flex items-center text-gray-800 cursor-pointer transition duration-200 ease-in-out transform p-2 rounded-md ${
-                  selectedCategory === category.name ? 'bg-blue-500 text-white' : 'hover:bg-gray-100'
-                }`}
-                onClick={() => handleCategorySelect(category.name)}
-              >
-                <span className="text-xl">{category.icon}</span>
-                <span className="text-sm font-medium ml-3">{category.name}</span>
+        // Desktop Sidebar Layout
+        <div className="flex">
+          {/* Sidebar for Categories */}
+          <div className="bg-white shadow-md rounded-lg p-6 w-64">
+            <ul className="space-y-4">
+              <li>
+                <div
+                  className={`text-gray-800 cursor-pointer transition-all duration-300 p-3 rounded-lg hover:bg-gradient-to-r from-gray-400 to-gray-600 hover:text-white ${
+                    selectedCategory === 'All Categories' ? 'bg-gray-600 text-white' : ''
+                  }`}
+                  onClick={() => handleCategorySelect('All Categories')}
+                >
+                  All Categories
+                </div>
               </li>
-            ))}
-          </ul>
+              {categories.map((category, index) => (
+                <li key={index}>
+                  <div
+                    className={`text-gray-800 cursor-pointer transition-all duration-300 p-3 rounded-lg hover:bg-gradient-to-r from-purple-500 to-blue-500 hover:text-white ${
+                      selectedCategory === category.name ? 'bg-blue-500 text-white' : ''
+                    }`}
+                    onClick={() => handleCategorySelect(category.name)}
+                  >
+                    {category.name}
+                  </div>
+                  {selectedCategory === category.name && subcategories[category.name] && (
+                    <ul className="ml-6 mt-3 space-y-2">
+                      {subcategories[category.name].map((subcategory, subIndex) =>
+                        typeof subcategory === 'string' ? (
+                          <li
+                            key={subIndex}
+                            className={`text-gray-600 text-sm cursor-pointer transition duration-300 hover:text-blue-500 ${
+                              selectedSubcategory === subcategory ? 'text-blue-500 font-bold' : ''
+                            }`}
+                            onClick={() => handleSubcategorySelect(subcategory)}
+                          >
+                            {subcategory}
+                          </li>
+                        ) : (
+                          <li key={subIndex}>
+                            <div className="font-bold text-gray-800 text-sm">
+                              {subcategory.name}
+                            </div>
+                            <ul className="ml-4 space-y-1">
+                              {subcategory.subcategories.map((subsub, subsubIndex) => (
+                                <li
+                                  key={subsubIndex}
+                                  className={`text-gray-600 text-sm cursor-pointer transition duration-300 hover:text-blue-500 ${
+                                    selectedSubcategory === subsub ? 'text-blue-500 font-bold' : ''
+                                  }`}
+                                  onClick={() => handleSubcategorySelect(subsub)}
+                                >
+                                  {subsub}
+                                </li>
+                              ))}
+                            </ul>
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+
         </div>
       )}
     </div>
