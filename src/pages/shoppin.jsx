@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { products } from '../data/product';
-import Item from '../components/item';
-import CategoryMenu from '../components/catgry';
+import { products } from '../data/product'; 
+import Item from '../components/item'; 
+import CategoryMenu from '../components/catgry'; 
 import { BsChevronDown } from 'react-icons/bs';
 import { useMediaQuery } from 'react-responsive';
 
@@ -9,7 +9,7 @@ const sortOptions = ["Price: Low to High", "Price: High to Low", "Newest Arrival
 const itemsPerPage = 16;
 
 const ShoppingPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("All Categories");
   const [sortOption, setSortOption] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,29 +17,34 @@ const ShoppingPage = () => {
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
-    setCurrentPage(1);
+    setCurrentPage(1); // Reset to the first page when a new category is selected
   };
 
   const handleSortOptionSelect = (option) => {
     setSortOption(option);
-    setIsDropdownOpen(false);
-    setCurrentPage(1);
+    setIsDropdownOpen(false); // Close the dropdown after selecting
+    setCurrentPage(1); // Reset to the first page when sorting
   };
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const filteredProducts = Object.values(products).filter(product =>
-    selectedCategory === "All" || product.title.toLowerCase().includes(selectedCategory.toLowerCase())
-  );
+  // Filter products based on the selected category
+  const filteredProducts = selectedCategory === "All Categories"
+    ? Object.values(products) // Show all products if "All Categories" is selected
+    : Object.values(products).filter(product =>
+        product.title.toLowerCase().includes(selectedCategory.toLowerCase())
+      );
 
+  // Sort the filtered products based on the selected sort option
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     if (sortOption === "Price: Low to High") return parseFloat(a.price.replace('Rs. ', '')) - parseFloat(b.price.replace('Rs. ', ''));
     if (sortOption === "Price: High to Low") return parseFloat(b.price.replace('Rs. ', '')) - parseFloat(a.price.replace('Rs. ', ''));
     return 0;
   });
 
+  // Calculate pagination details
   const totalPages = Math.ceil(sortedProducts.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentProducts = sortedProducts.slice(startIndex, startIndex + itemsPerPage);
@@ -90,7 +95,7 @@ const ShoppingPage = () => {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {currentProducts.map(product => (
             <Item
               key={product.id}

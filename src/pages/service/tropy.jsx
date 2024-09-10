@@ -2,15 +2,17 @@ import React from 'react';
 import Header from '../../components/first';
 import ImageGallery from '../../components/imggal';
 import prom5 from '../../assets/prom5.jpeg';
-import img1 from '../../assets/gall1.png';
-import img2 from '../../assets/gall2.png';
-import img3 from '../../assets/gall3.png';
+import img1 from '../../assets/trop1.png';
+import img2 from '../../assets/trop2.png';
+import img3 from '../../assets/trop3.png';
+import img4 from '../../assets/trop4.png';
 
 
 const images = [
   img1,
   img2,
   img3,
+  img4,
 
 ];
 
