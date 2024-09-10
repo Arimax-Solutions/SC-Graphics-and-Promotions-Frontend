@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; 
-import ProductForm from '../components/ProductForm'; 
+import axios from 'axios';
+import ProductForm from '../components/ProductForm';
 
 const AdminPage = () => {
   const [productList, setProductList] = useState([]);
@@ -12,8 +12,8 @@ const AdminPage = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get('http://localhost:8080/api/v1/products');
-        
         setProductList(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -43,8 +43,6 @@ const AdminPage = () => {
 
   const handleFormSubmit = async (productData) => {
     try {
-      console.log("/////////////")
-      console.log(productData)
       if (productData.img && productData.img instanceof File) {
         const reader = new FileReader();
         reader.onloadend = async () => {
@@ -53,8 +51,6 @@ const AdminPage = () => {
         };
         reader.readAsDataURL(productData.img);
       } else {
-        console.log("before saving")
-        console.log(productData)
         await saveProduct(productData);
       }
     } catch (error) {
@@ -64,18 +60,22 @@ const AdminPage = () => {
 
   const saveProduct = async (productData) => {
     let response;
-    if (isAddingNew) {
-      response = await axios.post('http://localhost:8080/api/v1/products', productData);
-      setProductList([...productList, response.data]);
-    } else {
-      response = await axios.put(`http://localhost:8080/api/v1/products/${productData.id}`, productData);
-      const updatedList = productList.map(product =>
-        product.id === productData.id ? response.data : product
-      );
-      setProductList(updatedList);
+    try {
+      if (isAddingNew) {
+        response = await axios.post('http://localhost:8080/api/v1/products', productData);
+        setProductList([...productList, response.data]);
+      } else {
+        response = await axios.put(`http://localhost:8080/api/v1/products/${productData.id}`, productData);
+        const updatedList = productList.map(product =>
+          product.id === productData.id ? response.data : product
+        );
+        setProductList(updatedList);
+      }
+      setEditingProduct(null);
+      setIsAddingNew(false);
+    } catch (error) {
+      console.error('Error saving product:', error);
     }
-    setEditingProduct(null);
-    setIsAddingNew(false);
   };
 
   return (
@@ -104,7 +104,7 @@ const AdminPage = () => {
             {productList.map(product => (
               <tr key={product.id} className="hover:bg-gray-100">
                 <td className="py-2 px-4 border-b">
-                  <img src={product.img} alt={product.title} className="w-16 h-16 object-cover" />
+                  <img src={`data:image/jpeg;base64,${product.img}`} alt={product.title} className="w-16 h-16 object-cover" />
                 </td>
                 <td className="py-2 px-4 border-b">{product.title}</td>
                 <td className="py-2 px-4 border-b">{product.price}</td>
@@ -131,7 +131,10 @@ const AdminPage = () => {
           <ProductForm
             product={editingProduct}
             onSubmit={handleFormSubmit}
-            onCancel={() => setEditingProduct(null)}
+            onCancel={() => {
+              setEditingProduct(null);
+              setIsAddingNew(false);
+            }}
           />
         )}
       </main>

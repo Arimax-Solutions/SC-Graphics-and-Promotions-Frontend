@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import InputFileUpload from './upload';
 
 // Mock data for categories and subcategories
 const categories = {
@@ -21,8 +20,8 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
       price: '',
       description: '',
       details: [],
-      category: '', // New field for category
-      subcategory: '' // New field for subcategory
+      category: '',
+      subcategory: '' // Ensure this is included
     }
   );
 
@@ -35,9 +34,16 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
     setFormData({
       ...formData,
       category: selectedCategory,
-      subcategory: '' // Reset subcategory when category changes
     });
   };
+
+  const handleSubCategoryChange = (e) => {
+  const selectedSubCategory = e.target.value;
+  setFormData({
+    ...formData,
+    subcategory: selectedSubCategory
+  });
+};
 
   const handleSubcategoryChange = (e) => {
     setFormData({ ...formData, subcategory: e.target.value });
@@ -56,12 +62,19 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
     });
   };
 
-  const handleImageUpload = (imageUrl) => {
-    setFormData({ ...formData, img: imageUrl });
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData({ ...formData, img: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
   };
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
     onSubmit(formData);
   };
 
@@ -71,7 +84,21 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
       <form onSubmit={handleFormSubmit}>
         <label className="block mb-2">
           Image:
-          <InputFileUpload onUploadComplete={handleImageUpload} />
+          <input
+            type="file"
+            onChange={handleImageUpload}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            accept="image/*"
+          />
+          {formData.img && typeof formData.img === 'string' && (
+          <div>
+            <img
+              src={`data:image/jpeg;base64,${formData.img}`}
+              alt="Preview"
+              className="w-32 h-32 object-cover mt-2"
+            />
+          </div>
+        )}
         </label>
         <label className="block mb-2">
           Title:
@@ -128,7 +155,7 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
             <select
               name="subcategory"
               value={formData.subcategory}
-              onChange={handleSubcategoryChange}
+              onChange={handleSubCategoryChange}
               className="w-full p-2 border border-gray-300 rounded-lg"
             >
               <option value="">Select Subcategory</option>
