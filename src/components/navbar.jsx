@@ -3,7 +3,7 @@ import { useState } from 'react';
 import logo from '../assets/SCicon.png'; 
 import SearchBar from './searchBar';
 
-const Navbar = () => {
+const Navbar = ({ isAdmin }) => { 
   const [isOpen, setIsOpen] = useState(false);
   const [isServiceOpen, setIsServiceOpen] = useState(false);
 
@@ -43,43 +43,37 @@ const Navbar = () => {
             <Link to="/aboutus" className="block px-4 py-2 rounded-full transition-all no-underline hover:underline">About Us</Link>
             <Link to="/shop" className="block px-4 py-2 rounded-full transition-all no-underline hover:underline">Shop</Link>
             
-            <div className="relative">
-              <button 
-                onClick={toggleServiceMenu} 
-                onMouseEnter={() => setIsServiceOpen(true)} 
-                onMouseLeave={() => setIsServiceOpen(false)}
-                className="block px-4 py-2 rounded-full transition-all no-underline hover:underline flex items-center"
-              >
-                Service
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </button>
-              
-              {isServiceOpen && (
-                <div 
-                  className="absolute left-0 mt-2 w-56 bg-gray-800 text-white rounded-lg shadow-lg border border-gray-600"
+            {/* Conditional Rendering for Admin */}
+            {isAdmin && (
+              <div className="relative">
+                <button 
+                  onClick={toggleServiceMenu} 
                   onMouseEnter={() => setIsServiceOpen(true)} 
                   onMouseLeave={() => setIsServiceOpen(false)}
+                  className="block px-4 py-2 rounded-full transition-all no-underline hover:underline flex items-center"
                 >
-                  <Link to="/grapic" className="block px-4 py-2 text-white no-underline hover:bg-gray-600 flex items-center rounded-t-lg">
-                    Graphic Designing
-                  </Link>
-                  <Link to="/lacer" className="block px-4 py-2 text-white no-underline hover:bg-gray-600 flex items-center">
-                    Laser Works
-                  </Link>
-                  <Link to="/keytags" className="block px-4 py-2 text-white no-underline hover:bg-gray-600 flex items-center">
-                    Key Tags / Magnet Tags
-                  </Link>
-                  <Link to="/custmise" className="block px-4 py-2 text-white no-underline hover:bg-gray-600 flex items-center">
-                    Customized Items
-                  </Link>
-                  <Link to="/tropy" className="block px-4 py-2 text-white no-underline hover:bg-gray-600 flex items-center rounded-b-lg">
-                    Trophy
-                  </Link>
-                </div>
-              )}
-            </div>
+                  Admin Services
+                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+                
+                {isServiceOpen && (
+                  <div 
+                    className="absolute left-0 mt-2 w-56 bg-gray-800 text-white rounded-lg shadow-lg border border-gray-600"
+                    onMouseEnter={() => setIsServiceOpen(true)} 
+                    onMouseLeave={() => setIsServiceOpen(false)}
+                  >
+                    <Link to="/admin/dashboard" className="block px-4 py-2 text-white no-underline hover:bg-gray-600 flex items-center rounded-t-lg">
+                      Dashboard
+                    </Link>
+                    <Link to="/admin/settings" className="block px-4 py-2 text-white no-underline hover:bg-gray-600 flex items-center">
+                      Settings
+                    </Link>
+                  </div>
+                )}
+              </div>
+            )}
 
             <Link to="/contact" className="block px-4 py-2 rounded-full transition-all no-underline hover:underline">Contact Us</Link>
           </div>
@@ -87,7 +81,7 @@ const Navbar = () => {
             <SearchBar />
           </div>
         </div>
-        
+
         {/* Mobile Sidebar */}
         <div className={`fixed inset-0 bg-black bg-opacity-50 z-40 ${isOpen ? 'block' : 'hidden'}`} onClick={toggleMenu}></div>
         <div className={`fixed top-0 left-0 w-64 h-full bg-gray-700 bg-opacity-50 z-50 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
@@ -101,34 +95,34 @@ const Navbar = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
               </svg>
             </button>
-            
+
             <Link to="/" className="block px-4 py-2 rounded-full transition-all text-white no-underline hover:underline" onClick={toggleMenu}>Home</Link>
             <Link to="/shop" className="block px-4 py-2 rounded-full transition-all text-white no-underline hover:underline" onClick={toggleMenu}>Shop</Link>
-            
-            <div>
-              <button 
-                onClick={toggleServiceMenu} 
-                className="block px-4 py-2 rounded-full transition-all text-white no-underline hover:underline flex items-center"
-              >
-                Service
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </button>
-              
-              {isServiceOpen && (
-                <div className="mt-2">
-                  <Link to="/grapic" className="block px-4 py-2 text-white no-underline hover:bg-gray-600 rounded-t-lg" onClick={toggleMenu}>Graphic Designing</Link>
-                  <Link to="/lacer" className="block px-4 py-2 text-white no-underline hover:bg-gray-600" onClick={toggleMenu}>Laser Works</Link>
-                  <Link to="/keytags" className="block px-4 py-2 text-white no-underline hover:bg-gray-600" onClick={toggleMenu}>Key Tags / Magnet Tags</Link>
-                  <Link to="/custmise" className="block px-4 py-2 text-white no-underline hover:bg-gray-600" onClick={toggleMenu}>Customized Items</Link>
-                  <Link to="/tropy" className="block px-4 py-2 text-white no-underline hover:bg-gray-600 rounded-b-lg" onClick={toggleMenu}>Trophy</Link>
-                </div>
-              )}
-            </div>
-            
+
+            {/* Conditional Rendering for Admin in Mobile View */}
+            {isAdmin && (
+              <div>
+                <button 
+                  onClick={toggleServiceMenu} 
+                  className="block px-4 py-2 rounded-full transition-all text-white no-underline hover:underline flex items-center"
+                >
+                  Admin Services
+                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+
+                {isServiceOpen && (
+                  <div className="mt-2">
+                    <Link to="/admin/dashboard" className="block px-4 py-2 text-white no-underline hover:bg-gray-600 rounded-t-lg" onClick={toggleMenu}>Dashboard</Link>
+                    <Link to="/admin/settings" className="block px-4 py-2 text-white no-underline hover:bg-gray-600" onClick={toggleMenu}>Settings</Link>
+                  </div>
+                )}
+              </div>
+            )}
+
             <Link to="/contact" className="block px-4 py-2 rounded-full transition-all text-white no-underline hover:underline" onClick={toggleMenu}>Contact Us</Link>
-            <Link to="/aboutus" className="block px-4 py-2 rounded-full transition-all text-white no-underline hover:underline" onClick={toggleMenu}>Blog</Link>
+            <Link to="/aboutus" className="block px-4 py-2 rounded-full transition-all text-white no-underline hover:underline" onClick={toggleMenu}>About Us</Link>
           </div>
         </div>
       </div>
