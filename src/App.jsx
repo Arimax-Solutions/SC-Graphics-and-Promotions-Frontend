@@ -15,11 +15,11 @@ import Tropy from './pages/service/tropy';
 import SearchResults from './components/serchresult';
 import Admin from './pages/admin';
 import Footer from './components/footer1';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { CubeIcon } from '@heroicons/react/16/solid';
+import Signup from './pages/signup';
+import Adminadd from './pages/adminadd';
 
-import './index.css';
+
+
 
 const App = () => {
   return (
@@ -40,7 +40,8 @@ const App = () => {
           <Route path="/custmise" element={<Cust />} />
           <Route path="/product/:productId" element={<SingleItem />} />
           <Route path="/search" element={<SearchResults />} />
-
+          <Route path="/login" element={<Signup/>} />
+          <Route path="/adminadd" element={<Adminadd/>} />
 
 
         </Routes>

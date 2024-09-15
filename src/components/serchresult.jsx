@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { products } from '../data/product';
-import Item from './Item'; // Import the Item component
+import Item from './item'; 
 
 const SearchResults = () => {
   const location = useLocation();
@@ -22,7 +22,7 @@ const SearchResults = () => {
               img={product.img}
               price={product.price}
               text={product.title}
-              productId={product.id} // Ensure you pass the productId
+              productId={product.id} 
             />
           ))}
         </div>

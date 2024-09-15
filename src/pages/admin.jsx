@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductForm from '../components/ProductForm';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const AdminPage = () => {
   const [productList, setProductList] = useState([]);
   const [editingProduct, setEditingProduct] = useState(null);
   const [isAddingNew, setIsAddingNew] = useState(false);
 
-  // Fetch products from the backend when the component mounts
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get('http://localhost:8080/api/v1/products');
         setProductList(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -83,49 +83,56 @@ const AdminPage = () => {
       <header className="admin-header flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Product Management</h1>
         <button
-          onClick={handleAddNew}
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-        >
-          Add New Product
-        </button>
+  onClick={handleAddNew}
+  className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
+>
+  Add New Product
+</button>
+
       </header>
 
       <main>
-        <table className="min-w-full bg-white border border-gray-300">
-          <thead>
-            <tr>
-              <th className="py-2 px-4 border-b">Image</th>
-              <th className="py-2 px-4 border-b">Title</th>
-              <th className="py-2 px-4 border-b">Price</th>
-              <th className="py-2 px-4 border-b">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {productList.map(product => (
-              <tr key={product.id} className="hover:bg-gray-100">
-                <td className="py-2 px-4 border-b">
-                  <img src={`data:image/jpeg;base64,${product.img}`} alt={product.title} className="w-16 h-16 object-cover" />
-                </td>
-                <td className="py-2 px-4 border-b">{product.title}</td>
-                <td className="py-2 px-4 border-b">{product.price}</td>
-                <td className="py-2 px-4 border-b">
-                  <button
-                    onClick={() => handleEdit(product)}
-                    className="text-blue-500 hover:underline"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(product.id)}
-                    className="text-red-500 hover:underline ml-4"
-                  >
-                    Delete
-                  </button>
-                </td>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm text-left text-gray-500">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+              <tr>
+                <th className="py-3 px-6 text-left font-medium text-gray-600">Product Image</th>
+                <th className="py-3 px-6 text-left font-medium text-gray-600">Product Name</th>
+                <th className="py-3 px-6 text-left font-medium text-gray-600">Category</th>
+                <th className="py-3 px-6 text-left font-medium text-gray-600">Price</th>
+                <th className="py-3 px-6 text-left font-medium text-gray-600">Description</th>
+                <th className="py-3 px-6 text-left font-medium text-gray-600">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {productList.map(product => (
+                <tr key={product.id} className="hover:bg-gray-50 border-b border-gray-200">
+                  <td className="py-4 px-6">
+                    <img src={`data:image/jpeg;base64,${product.img}`} alt={product.title} className="w-16 h-16 object-cover rounded" />
+                  </td>
+                  <td className="py-4 px-6 font-medium">{product.title}</td>
+                  <td className="py-4 px-6 font-medium">{product.category || 'N/A'}</td>
+                  <td className="py-4 px-6 font-medium">LKR {product.price}</td>
+                  <td className="py-4 px-6 font-medium">{product.description || 'No description'}</td>
+                  <td className="py-4 px-6 flex space-x-2">
+                    <button
+                      onClick={() => handleEdit(product)}
+                      className="bg-transparent p-1 hover:bg-gray-100 rounded"
+                    >
+                      <FontAwesomeIcon icon={faPen} className="text-blue-500" />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(product.id)}
+                      className="bg-transparent p-1 hover:bg-gray-100 rounded"
+                    >
+                      <FontAwesomeIcon icon={faTrash} className="text-red-500" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         {(editingProduct || isAddingNew) && (
           <ProductForm
