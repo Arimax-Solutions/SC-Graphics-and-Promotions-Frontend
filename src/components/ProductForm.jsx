@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-//  categories and subcategories
+// Categories and subcategories
 const categories = {
   "Laser Works": ["Laser Cutting", "Laser Engraving", "Laser Marking"],
   "Key Tags": ["Wooden", "Acrylic"],
@@ -19,10 +19,9 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
       title: '',
       price: '',
       description: '',
-      details: [],
       category: '',
       subcategory: '',
-      darazLink:''
+      darazLink: ''
     }
   );
 
@@ -35,6 +34,7 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
     setFormData({
       ...formData,
       category: selectedCategory,
+      subcategory: '', // Reset subcategory when category changes
     });
   };
 
@@ -72,10 +72,10 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
           className="w-full text-sm text-gray-700 border border-gray-200 rounded-lg p-2 file:border-0 file:bg-blue-50 file:py-2 file:px-4 file:rounded-lg file:text-blue-700 file:cursor-pointer"
           accept="image/*"
         />
-        {formData.img && typeof formData.img === 'string' && (
+        {formData.img && (
           <div className="mt-4">
             <img
-              src={`data:image/jpeg;base64,${formData.img}`}
+              src={formData.img}
               alt="Preview"
               className="w-full h-auto rounded-lg"
             />
@@ -108,7 +108,7 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
           <label className="block text-gray-700 text-sm font-bold mb-2">Daraz Selling Link:</label>
           <input
             type="text"
-            name="darzLink"
+            name="darazLink"
             value={formData.darazLink}
             onChange={handleChange}
             className="w-full p-2 border border-gray-200 rounded-lg"
