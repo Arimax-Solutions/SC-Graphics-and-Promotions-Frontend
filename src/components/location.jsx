@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
 const LocationMap = () => {
-  const position = [6.8406, 79.9604];
+  const position = [6.8406, 79.9604]; // Your location coordinates
 
   const icon = L.icon({
     iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
@@ -23,7 +23,19 @@ const LocationMap = () => {
         />
         <Marker position={position} icon={icon}>
           <Popup>
-            178/A, Palanwatta, Pannipitiya, Colombo, Sri Lanka 10230
+            <div>
+              <p>178/A, Palanwatta, Pannipitiya, Colombo, Sri Lanka 10230</p>
+              {/* Button for Google Maps Directions */}
+              <a
+                href={`https://www.google.com/maps/dir/?api=1&destination=${position[0]},${position[1]}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200">
+                  Get Directions
+                </button>
+              </a>
+            </div>
           </Popup>
         </Marker>
       </MapContainer>

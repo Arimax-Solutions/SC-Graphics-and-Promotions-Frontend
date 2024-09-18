@@ -17,15 +17,14 @@ import Admin from './pages/admin';
 import Footer from './components/footer1';
 import Signup from './pages/signup';
 import Adminadd from './pages/adminadd';
-
-
-
+import ScrollToTop from './components/ScrollToTop';
 
 const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <Navbar />
-      <div className="">
+      <div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shoping />} />
@@ -40,10 +39,8 @@ const App = () => {
           <Route path="/custmise" element={<Cust />} />
           <Route path="/product/:productId" element={<SingleItem />} />
           <Route path="/search" element={<SearchResults />} />
-          <Route path="/login" element={<Signup/>} />
-          <Route path="/adminadd" element={<Adminadd/>} />
-
-
+          <Route path="/login" element={<Signup />} />
+          <Route path="/adminadd" element={<Adminadd />} />
         </Routes>
       </div>
       <Footer />

@@ -6,14 +6,36 @@ import SearchBar from './searchBar';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isServiceOpen, setIsServiceOpen] = useState(false);
+  const [hoverTimeout, setHoverTimeout] = useState(null);
 
   const toggleMenu = () => setIsOpen(!isOpen);
-  const toggleServiceMenu = () => setIsServiceOpen(!isServiceOpen);
+
+  const handleServiceMenuToggle = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+    }
+    setIsServiceOpen(!isServiceOpen);
+  };
+
+  const handleMouseEnter = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);  // Clear any existing timeout
+    }
+    setIsServiceOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHoverTimeout(setTimeout(() => {
+      setIsServiceOpen(false);
+    }, 200)); // Close after 200ms delay
+  };
 
   return (
-    <nav className="fixed w-full z-50 bg-gray-700 bg-opacity-50 text-white text-base sm:text-lg lg:text-xl font-mono p-1 shadow-md transition-all duration-300">
+    <nav 
+      className={`fixed w-full z-50 text-white text-base sm:text-lg lg:text-xl font-mono p-1 shadow-md transition-all duration-300 
+        ${isOpen ? 'bg-blue-500' : 'bg-gray-700 bg-opacity-50'}`}
+    >
       <div className="container mx-auto flex justify-between items-center p-4">
-        {/* Logo and Menu Button with Search Bar */}
         <div className="flex items-center w-full lg:w-auto justify-between lg:justify-start">
           <div className="flex items-center">
             <Link to="/" className="mr-4">
@@ -30,24 +52,24 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Search Bar for Mobile */}
           <div className="w-full lg:hidden">
             <SearchBar className="w-full" />
           </div>
         </div>
 
-        {/* Navigation Links for Desktop */}
         <div className="hidden lg:flex lg:flex-grow lg:items-center lg:justify-between w-full lg:w-auto mt-4 lg:mt-0">
           <div className="flex">
             <Link to="/" className="block px-4 py-2 rounded-full transition-all no-underline hover:underline">Home</Link>
             <Link to="/aboutus" className="block px-4 py-2 rounded-full transition-all no-underline hover:underline">About Us</Link>
             <Link to="/shop" className="block px-4 py-2 rounded-full transition-all no-underline hover:underline">Shop</Link>
             
-            <div className="relative">
+            <div 
+              className="relative"
+              onMouseEnter={handleMouseEnter} 
+              onMouseLeave={handleMouseLeave}
+            >
               <button 
-                onClick={toggleServiceMenu} 
-                onMouseEnter={() => setIsServiceOpen(true)} 
-                onMouseLeave={() => setIsServiceOpen(false)}
+                onClick={handleServiceMenuToggle} 
                 className="block px-4 py-2 rounded-full transition-all no-underline hover:underline flex items-center"
               >
                 Service
@@ -57,24 +79,20 @@ const Navbar = () => {
               </button>
               
               {isServiceOpen && (
-                <div 
-                  className="absolute left-0 mt-2 w-56 bg-gray-800 text-white rounded-lg shadow-lg border border-gray-600"
-                  onMouseEnter={() => setIsServiceOpen(true)} 
-                  onMouseLeave={() => setIsServiceOpen(false)}
-                >
-                  <Link to="/grapic" className="block px-4 py-2 text-white no-underline hover:bg-gray-600 flex items-center rounded-t-lg">
+                <div className="absolute left-0 mt-2 w-56 bg-gray-800 text-white rounded-lg shadow-lg border border-gray-600">
+                  <Link to="/grapic" className="block px-4 py-2 text-white no-underline hover:bg-gray-600 rounded-t-lg">
                     Graphic Designing
                   </Link>
-                  <Link to="/lacer" className="block px-4 py-2 text-white no-underline hover:bg-gray-600 flex items-center">
+                  <Link to="/lacer" className="block px-4 py-2 text-white no-underline hover:bg-gray-600">
                     Laser Works
                   </Link>
-                  <Link to="/keytags" className="block px-4 py-2 text-white no-underline hover:bg-gray-600 flex items-center">
+                  <Link to="/keytags" className="block px-4 py-2 text-white no-underline hover:bg-gray-600">
                     Key Tags / Magnet Tags
                   </Link>
-                  <Link to="/custmise" className="block px-4 py-2 text-white no-underline hover:bg-gray-600 flex items-center">
+                  <Link to="/custmise" className="block px-4 py-2 text-white no-underline hover:bg-gray-600">
                     Customized Items
                   </Link>
-                  <Link to="/tropy" className="block px-4 py-2 text-white no-underline hover:bg-gray-600 flex items-center rounded-b-lg">
+                  <Link to="/tropy" className="block px-4 py-2 text-white no-underline hover:bg-gray-600 rounded-b-lg">
                     Trophy
                   </Link>
                 </div>
@@ -107,7 +125,7 @@ const Navbar = () => {
             
             <div>
               <button 
-                onClick={toggleServiceMenu} 
+                onClick={handleServiceMenuToggle} 
                 className="block px-4 py-2 rounded-full transition-all text-white no-underline hover:underline flex items-center"
               >
                 Service
