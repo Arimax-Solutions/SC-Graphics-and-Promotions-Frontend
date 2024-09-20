@@ -1,17 +1,33 @@
-
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom'; // For React Router
+// or import { useRouter } from 'next/router'; for Next.js
 
 const ProductDetails = () => {
-  const { productName } = useParams();
+    const { id } = useParams(); // For React Router
+    // const router = useRouter(); // For Next.js
+    const [product, setProduct] = useState(null);
 
-  return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">Product: {productName}</h1>
-      <p>Details and specifications about {productName}...</p>
+    useEffect(() => {
+        const fetchProductDetails = async () => {
+            const response = await fetch(`http://localhost:8080/api/v1/products/${id}`);
+            const data = await response.json();
+            setProduct(data);
+        };
 
-    </div>
-  );
+        fetchProductDetails();
+    }, [id]);
+
+    if (!product) return <div>Loading...</div>;
+
+    return (
+        <div>
+            <h1>{product.title}</h1>
+            <img src={product.img} alt={product.title} />
+            <p>{product.price}</p>
+            <p>{product.description}</p>
+            {/* Add more product details here */}
+        </div>
+    );
 };
 
 export default ProductDetails;
