@@ -4,30 +4,34 @@ import { Link } from 'react-router-dom';
 const Item = ({ img, price, text, productId }) => {
   if (!productId) {
     console.error("Product ID is missing for the Item component.");
-    return null;
+    return <div className="text-red-500">Product not available</div>; // Fallback UI
   }
 
   return (
-    <Link to={`/product/${productId}`} className="block transform transition-transform duration-300 hover:scale-105">
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-        <div className="relative">
-          <img 
-            src={img} 
-            alt={text} 
-            className="w-full h-48 sm:h-56 object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <span className="text-white text-lg font-semibold text-center px-2">{text}</span>
+      <Link
+          to={`/product/${productId}`}
+          className="block transform transition-transform duration-300 hover:scale-105"
+          aria-label={`View details for ${text}`} // Accessibility
+      >
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="relative">
+            <img
+                src={img}
+                alt={text}
+                className="w-full h-48 sm:h-56 object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <span className="text-white text-lg font-semibold text-center px-2">{text}</span>
+            </div>
+          </div>
+          <div className="p-4">
+            <h3 className="text-pink-600 text-xl font-bold text-center">{price}</h3>
+            <p className="text-gray-700 text-center mt-2 h-12 overflow-hidden text-ellipsis">
+              {text}
+            </p>
           </div>
         </div>
-        <div className="p-4">
-          <h3 className="text-pink-600 text-xl font-bold text-center">{price}</h3>
-          <p className="text-gray-700 text-center mt-2 h-12 overflow-hidden text-ellipsis">
-            {text}
-          </p>
-        </div>
-      </div>
-    </Link>
+      </Link>
   );
 };
 
