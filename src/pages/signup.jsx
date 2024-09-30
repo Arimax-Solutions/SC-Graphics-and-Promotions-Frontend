@@ -28,7 +28,7 @@ function Login() {
         const data = await response.json();
         alert('Login successful');
 
-        window.location.href = '/adminadd';
+        window.location.href = '/admin';
 
       } else {
         const errorData = await response.json();
