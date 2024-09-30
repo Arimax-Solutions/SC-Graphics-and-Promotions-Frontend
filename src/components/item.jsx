@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios'; // Import axios for making API calls
 
 const Item = ({ img, price, text, productId }) => {
   if (!productId) {
@@ -7,11 +8,21 @@ const Item = ({ img, price, text, productId }) => {
     return <div className="text-red-500">Product not available</div>; // Fallback UI
   }
 
+  const handleClick = async () => {
+    try {
+      // Call the API to increment the click count
+      await axios.post(`http://localhost:8080/api/v1/products/click/count/${productId}`);
+    } catch (error) {
+      console.error("Error incrementing click count:", error);
+    }
+  };
+
   return (
       <Link
           to={`/product/${productId}`}
           className="block transform transition-transform duration-300 hover:scale-105"
-          aria-label={`View details for ${text}`} // Accessibility
+          aria-label={`View details for ${text}`}
+          onClick={handleClick} // Call handleClick on click
       >
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="relative">
