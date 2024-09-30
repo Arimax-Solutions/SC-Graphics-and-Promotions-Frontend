@@ -21,7 +21,8 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
         description: '',
         category: '',
         subcategory: '',
-        darazLink: ''
+        darazLink: '',
+        clickCount: ''
       }
   );
 
