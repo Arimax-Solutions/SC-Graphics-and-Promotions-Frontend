@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/navbar';
 import Home from './pages/home';
 import Shop from './pages/shop';
 import Shoping from './pages/shoppin';
@@ -18,13 +17,13 @@ import Footer from './components/footer1';
 import Signup from './pages/signup';
 import Adminadd from './pages/adminadd';
 import ScrollToTop from './components/ScrollToTop';
+import Layout from './components/Layout'; // Import the new Layout component
 
 const App = () => {
   return (
     <Router>
       <ScrollToTop />
-      <Navbar />
-      <div>
+      <Layout> {/* Use Layout to wrap your routes */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shoping />} />
@@ -42,7 +41,7 @@ const App = () => {
           <Route path="/login" element={<Signup />} />
           <Route path="/adminadd" element={<Adminadd />} />
         </Routes>
-      </div>
+      </Layout>
       <Footer />
     </Router>
   );

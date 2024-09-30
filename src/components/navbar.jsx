@@ -19,7 +19,7 @@ const Navbar = () => {
 
   const handleMouseEnter = () => {
     if (hoverTimeout) {
-      clearTimeout(hoverTimeout);  // Clear any existing timeout
+      clearTimeout(hoverTimeout);  
     }
     setIsServiceOpen(true);
   };
@@ -27,7 +27,7 @@ const Navbar = () => {
   const handleMouseLeave = () => {
     setHoverTimeout(setTimeout(() => {
       setIsServiceOpen(false);
-    }, 200)); // Close after 200ms delay
+    }, 200)); 
   };
 
   return (
@@ -39,7 +39,12 @@ const Navbar = () => {
         <div className="flex items-center w-full lg:w-auto justify-between lg:justify-start">
           <div className="flex items-center">
             <Link to="/" className="mr-4">
-              <img src={logo} alt="Logo" className="w-12 h-12 object-contain" />
+            <img 
+  src={logo} 
+  alt="Logo" 
+  className="w-12 h-12 object-contain rounded-full border-2 border-white p-1 bg-white"
+/>
+
             </Link>
             <button 
               onClick={toggleMenu} 
