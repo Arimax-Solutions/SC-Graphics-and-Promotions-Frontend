@@ -15,6 +15,7 @@ const AdminPage = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get('http://localhost:8080/api/v1/products');
+        console.log(response.data)
         setProductList(response.data);
       } catch (error) {
         Swal.fire('Error', 'Error fetching products!', 'error');
@@ -144,7 +145,7 @@ const AdminPage = () => {
                     <td className="py-4 px-6">
                       {product.img ? (
                         <img
-                          src={`data:image/jpeg;base64,${product.img}`}
+                          src={product.img} // No longer using base64
                           alt={product.title || 'Product Image'}
                           className="w-16 h-16 object-cover rounded"
                         />
