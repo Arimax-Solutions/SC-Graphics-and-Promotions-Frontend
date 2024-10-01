@@ -76,9 +76,7 @@ function Login() {
                 />
               </div>
               {error && <p className="text-red-500 text-sm">{error}</p>}
-              <div className="flex justify-between items-center">
-                <a href="#" className="text-blue-300 hover:text-blue-400 text-sm underline">Forgot password?</a>
-              </div>
+             
               <button
                   type="submit"
                   className="w-full py-3 px-4 bg-gradient-to-r from-green-400 to-teal-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-transform duration-300 transform hover:scale-105"
