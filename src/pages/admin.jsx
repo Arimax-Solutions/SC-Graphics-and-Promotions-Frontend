@@ -75,65 +75,65 @@ const AdminPage = () => {
 
   const saveProduct = async (productData, imageFile) => {
     try {
-        let formData = new FormData();
-        
-        // Serialize productData into JSON string and append to formData
-        const productJson = JSON.stringify({
-            title: productData.title,
-            category: productData.category,
-            price: productData.price,
-            description: productData.description
+      let formData = new FormData();
+
+      // Create a new object excluding the 'img' property
+      const { img, ...productWithoutImage } = productData;
+
+      // Append product data as a JSON string (without the img field)
+      formData.append('product', JSON.stringify(productWithoutImage));
+
+      // Append the image file (with 'img' key as per the backend)
+      if (imageFile) {
+        formData.append('img', imageFile); // Ensure 'img' matches backend expectation
+      } else {
+        throw new Error('Image file is required'); // Add a condition to throw an error if no image
+      }
+
+      let response;
+
+      // Check if adding a new product
+      if (isAddingNew) {
+        // Send POST request with form data
+        response = await axios.post('http://localhost:8080/api/v1/products', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data', // Ensure correct content type
+          },
         });
-        formData.append('product', productJson); // Append the JSON string under the key 'product'
-  
-        // Append the image file if it exists
-        if (imageFile) {
-            formData.append('image', imageFile); // Ensure 'image' matches backend expectation
-        } else {
-            throw new Error('Image file is required');
-        }
 
-        let response;
-  
-        // Check if adding a new product or updating an existing one
-        if (isAddingNew) {
-            response = await axios.post('http://localhost:8080/api/v1/products', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-        } else {
-            response = await axios.put(`http://localhost:8080/api/v1/products/${productData.id}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+        // Handle the response
+        if (response.status === 200) {
+          setProductList([...productList, response.data]); // Update the product list
+          Swal.fire('Success', 'Product added successfully!', 'success');
         }
-        if (response.status === 200 || response.status === 201) {
-            if (isAddingNew) {
-                setProductList([...productList, response.data]); // Add the new product to the list
-            } else {
-                // Update the product list with the edited product
-                const updatedList = productList.map((product) =>
-                    product.id === productData.id ? response.data : product
-                );
-                setProductList(updatedList);
-            }
-            Swal.fire('Success', isAddingNew ? 'Product added successfully!' : 'Product updated successfully!', 'success');
-            setInterval(()=>{
-              window.location.reload()
-            },3000)
+      } else {
+        // If updating an existing product
+        response = await axios.put(`http://localhost:8080/api/v1/products/${productData.id}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        if (response.status === 200) {
+          // Update the product list with the updated product
+          const updatedList = productList.map((product) =>
+              product.id === productData.id ? response.data : product
+          );
+          setProductList(updatedList);
+          Swal.fire('Success', 'Product updated successfully!', 'success');
+          setInterval(()=>{
+            window.location.reload();
+          },3000)
         }
-  
-        setEditingProduct(null);
-        setIsAddingNew(false);
-  
+      }
+
+      // Reset form and state after successful operation
+      setEditingProduct(null);
+      setIsAddingNew(false);
     } catch (error) {
-        console.error('Error while saving product:', error); // Debug log
-        Swal.fire('Error', error.message || 'An error occurred while saving the product!', 'error');
+      Swal.fire('Error', error.message || 'An error occurred while saving the product!', 'error');
     }
-};
-
+  };
   
 
   return (
