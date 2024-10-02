@@ -1,68 +1,74 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Item from '../components/item';
 import CategoryMenu from '../components/catgry';
 import { BsChevronDown } from 'react-icons/bs';
 import { useMediaQuery } from 'react-responsive';
-import axios from 'axios'; // Import axios for API calls
+import axios from 'axios';
 
 const sortOptions = ["Price: Low to High", "Price: High to Low", "Newest Arrivals"];
 const itemsPerPage = 16;
 
 const ShoppingPage = () => {
-  const [products, setProducts] = useState([]); // State for products
+  const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  const [selectedSubcategory, setSelectedSubcategory] = useState(""); // New state for subcategory
   const [sortOption, setSortOption] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const isMobile = useMediaQuery({ maxWidth: 768 });
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); // Error state
 
   // Fetch products from the API
   const fetchProducts = async () => {
     try {
       const response = await axios.get('http://localhost:8080/api/v1/products');
-      setProducts(response.data); // Set products from the API response
-      setLoading(false); // Update loading state
+      setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
-      setLoading(false); // Update loading state even on error
+      setError("Failed to load products. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchProducts(); // Fetch products when the component mounts
+    fetchProducts();
   }, []);
 
-  const handleCategorySelect = (category) => {
+  const handleCategorySelect = (category, subcategory = "") => {
     setSelectedCategory(category);
-    setCurrentPage(1); // Reset to the first page when a new category is selected
+    setSelectedSubcategory(subcategory);
+    setCurrentPage(1);
   };
 
   const handleSortOptionSelect = (option) => {
     setSortOption(option);
-    setIsDropdownOpen(false); // Close the dropdown after selecting
-    setCurrentPage(1); // Reset to the first page when sorting
+    setIsDropdownOpen(false);
+    setCurrentPage(1);
   };
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  // Filter products based on the selected category
-  const filteredProducts = selectedCategory === "All Categories"
-      ? products // Show all products if "All Categories" is selected
-      : products.filter(product =>
-          product.title.toLowerCase().includes(selectedCategory.toLowerCase())
-      );
+  // Filter products based on category and subcategory
+  const filteredProducts = useMemo(() => {
+    return products.filter(product => {
+      const matchesCategory = selectedCategory === "All Categories" || product.category === selectedCategory;
+      const matchesSubcategory = !selectedSubcategory || product.subcategory === selectedSubcategory;
+      return matchesCategory && matchesSubcategory;
+    });
+  }, [products, selectedCategory, selectedSubcategory]);
 
-  // Sort the filtered products based on the selected sort option
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
-    if (sortOption === "Price: Low to High") return parseFloat(a.price.replace('Rs. ', '')) - parseFloat(b.price.replace('Rs. ', ''));
-    if (sortOption === "Price: High to Low") return parseFloat(b.price.replace('Rs. ', '')) - parseFloat(a.price.replace('Rs. ', ''));
-    return 0;
-  });
+  const sortedProducts = useMemo(() => {
+    return [...filteredProducts].sort((a, b) => {
+      if (sortOption === "Price: Low to High") return parseFloat(a.price) - parseFloat(b.price);
+      if (sortOption === "Price: High to Low") return parseFloat(b.price) - parseFloat(a.price);
+      return 0;
+    });
+  }, [filteredProducts, sortOption]);
 
-  // Calculate pagination details
   const totalPages = Math.ceil(sortedProducts.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentProducts = sortedProducts.slice(startIndex, startIndex + itemsPerPage);
@@ -72,7 +78,11 @@ const ShoppingPage = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Optional loading indicator
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="text-red-500">{error}</div>; // Display error message
   }
 
   return (
@@ -117,32 +127,38 @@ const ShoppingPage = () => {
           </div>
 
           {/* Product Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {currentProducts.map(product => (
-                <Item
-                    key={product.id}
-                    img={product.img}
-                    price={product.price}
-                    text={product.title}
-                    productId={product.id}
-                />
-            ))}
-          </div>
+          {currentProducts.length > 0 ? (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {currentProducts.map(product => (
+                    <Item
+                        key={product.id}
+                        img={product.img}
+                        price={product.price}
+                        text={product.title}
+                        productId={product.id}
+                    />
+                ))}
+              </div>
+          ) : (
+              <div className="text-center text-gray-500">No products found.</div>
+          )}
 
           {/* Pagination Controls */}
-          <div className="flex justify-center mt-8">
-            {Array.from({ length: totalPages }, (_, index) => (
-                <button
-                    key={index + 1}
-                    onClick={() => handlePageChange(index + 1)}
-                    className={`mx-1 px-3 py-2 border rounded ${
-                        index + 1 === currentPage ? 'bg-blue-500 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
-                    }`}
-                >
-                  {index + 1}
-                </button>
-            ))}
-          </div>
+          {totalPages > 1 && (
+              <div className="flex justify-center mt-8">
+                {Array.from({ length: totalPages }, (_, index) => (
+                    <button
+                        key={index + 1}
+                        onClick={() => handlePageChange(index + 1)}
+                        className={`mx-1 px-3 py-2 border rounded ${
+                            index + 1 === currentPage ? 'bg-blue-500 text-white' : 'bg-white text-gray-700 hover:bg-gray-200'
+                        }`}
+                    >
+                      {index + 1}
+                    </button>
+                ))}
+              </div>
+          )}
         </div>
       </div>
   );
