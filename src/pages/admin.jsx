@@ -107,8 +107,26 @@ const AdminPage = () => {
           Swal.fire('Success', 'Product added successfully!', 'success');
         }
       } else {
-        // If updating an existing product
-        response = await axios.put(`http://localhost:8080/api/v1/products/${productData.id}`, formData, {
+        let formData1 = new FormData();
+        
+        // Serialize productData into JSON string and append to formData
+        const productJson = JSON.stringify({
+            title: productData.title,
+            category: productData.category,
+            price: productData.price,
+            description: productData.description
+        });
+        formData1.append('product', productJson); // Append the JSON string under the key 'product'
+  
+        // Append the image file if it exists
+        if (imageFile) {
+          formData1.append('image', imageFile); // Ensure 'image' matches backend expectation
+        } else {
+            throw new Error('Image file is required');
+        }
+
+
+        response = await axios.put(`http://localhost:8080/api/v1/products/${productData.id}`, formData1, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
