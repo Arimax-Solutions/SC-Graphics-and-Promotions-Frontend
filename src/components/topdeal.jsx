@@ -15,6 +15,7 @@ const photos = [
   prom6
 ];
 
+
 const PhotoList = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
