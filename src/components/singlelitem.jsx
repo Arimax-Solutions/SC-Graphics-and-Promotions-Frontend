@@ -69,9 +69,13 @@ const SingleItemPage = () => {
                   <FaPhoneAlt className="mr-2" /> Contact Us
                 </button>
               </a>
-              <button className="flex items-center justify-center w-full lg:w-auto bg-orange-500 text-white font-semibold py-3 px-6 rounded-full hover:bg-orange-600 transition-all shadow-lg">
+              <button
+                onClick={() => window.open(product.darazLink, '_blank')}
+                className="flex items-center justify-center w-full lg:w-auto bg-orange-500 text-white font-semibold py-3 px-6 rounded-full hover:bg-orange-600 transition-all shadow-lg"
+              >
                 <FaBox className="mr-2" /> Order Now
               </button>
+
             </div>
 
             {/* Social Media Links */}
