@@ -21,14 +21,18 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
     category: '',
     subcategory: '',
     darazLink: '',
-    clickCount: ''
+    clickCount: '',
+    details: []
   });
+
+  const [detail, setDetail] = useState({ label: '', value: '' });
 
   useEffect(() => {
     if (product) {
       setFormData({
         ...product,
-        img: product.img || '', // Ensure img is set correctly if present
+        img: product.img || '',
+        details: product.details || [],
       });
     }
   }, [product]);
@@ -61,6 +65,21 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
     }
   };
 
+  const handleDetailChange = (e) => {
+    const { name, value } = e.target;
+    setDetail({ ...detail, [name]: value });
+  };
+
+  const addDetail = () => {
+    if (detail.label && detail.value) {
+      setFormData({
+        ...formData,
+        details: [...formData.details, detail]
+      });
+      setDetail({ label: '', value: '' }); // Reset detail input fields
+    }
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
@@ -81,7 +100,7 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
           <div className="mt-4">
             {formData.img instanceof File ? (
               <img
-                src={URL.createObjectURL(formData.img)} 
+                src={URL.createObjectURL(formData.img)}
                 alt="Preview"
                 className="w-full h-auto"
               />
@@ -153,16 +172,54 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
             className="w-full mb-4 p-2 border rounded"
           />
 
+          {/* Product Details Section */}
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold mb-2">Add Product Details</h3>
+            <div className="flex gap-4 mb-2">
+              <input
+                type="text"
+                name="label"
+                value={detail.label}
+                onChange={handleDetailChange}
+                placeholder="Detail Label"
+                className="w-1/2 h-12 p-2 border rounded"
+              />
+              <input
+                type="text"
+                name="value"
+                value={detail.value}
+                onChange={handleDetailChange}
+                placeholder="Detail Value"
+                className="w-1/2 h-12 p-2 border rounded"
+              />
+              <button
+                type="button"
+                onClick={addDetail}
+                className="bg-green-500  text-white p-2 rounded"
+              >
+                Add Detail
+              </button>
+            </div>
+            {/* Display added details */}
+            <ul className="list-disc ml-4">
+              {formData.details.map((d, index) => (
+                <li key={index}>
+                  <strong>{d.label}:</strong> {d.value}
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <button
             type="submit"
-            className="bg-blue-500 text-white p-2 rounded"
+            className="bg-blue-500 text-white p-2 rounded mt-4"
           >
             Submit
           </button>
           <button
             type="button"
             onClick={onCancel}
-            className="ml-4 bg-red-500 text-white p-2 rounded"
+            className="ml-4 bg-red-500 text-white p-2 rounded mt-4"
           >
             Cancel
           </button>
