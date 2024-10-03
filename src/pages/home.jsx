@@ -9,9 +9,20 @@ import Button from '@mui/material/Button';
 import { LuPhoneCall } from "react-icons/lu";
 import darz from '../assets/darzlogo.png';
 
+const categories = [
+  { name: 'Laser Works' },
+  { name: 'Key Tags' },
+  { name: 'Magnet Tags' },
+  { name: 'Name Boards' },
+  { name: 'Gift Items' },
+  { name: 'Customized Items' },
+  { name: 'Trophy' },
+];
+
 const Home = () => {
   const [animationEnded, setAnimationEnded] = useState(false);
   const [products, setProducts] = useState([]); // State to store fetched products
+  const [selectedCategory, setSelectedCategory] = useState('All'); // State to track selected category
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -19,7 +30,6 @@ const Home = () => {
     }, 1000); // Animation time
     return () => clearTimeout(timer);
   }, []);
-
 
   // Fetch popular products from the API
   const fetchPopularProducts = async () => {
@@ -38,6 +48,16 @@ const Home = () => {
   useEffect(() => {
     fetchPopularProducts(); // Call fetch function on component mount
   }, []);
+
+  // Function to filter products by category
+  const filterByCategory = (category) => {
+    setSelectedCategory(category);
+  };
+
+  // Filtered products based on selected category
+  const filteredProducts = selectedCategory === 'All'
+      ? products
+      : products.filter(product => product.category === selectedCategory);
 
   return (
       <>
@@ -85,15 +105,35 @@ const Home = () => {
           <ThemeProvider />
         </div>
 
-        <div className="flex flex-col lg:flex-row m-4 px-0 lg:px-0">
-          <div className="hidden lg:block lg:w-1/4 lg:mr-6 mb-6 lg:mb-0 flex justify-center lg:justify-start">
-            <BrowseCategories />
-          </div>
+        {/* Category Buttons */}
+        <div className="flex justify-center space-x-4 mt-4">
+          <button
+              onClick={() => filterByCategory('All')}
+              className={`py-2 px-4 rounded-md text-white ${selectedCategory === 'All' ? 'bg-blue-700' : 'bg-blue-500 hover:bg-blue-600'}`}
+          >
+            All
+          </button>
+          {categories.map(category => (
+              <button
+                  key={category.name}
+                  onClick={() => filterByCategory(category.name)}
+                  className={`py-2 px-4 rounded-md text-white ${selectedCategory === category.name ? 'bg-blue-700' : 'bg-blue-500 hover:bg-blue-600'}`}
+              >
+                {category.name}
+              </button>
+          ))}
 
-          <div className="lg:w-3/4 ">
+        </div>
+
+        <div className="flex flex-col lg:flex-row m-4 px-0 lg:px-0">
+          {/*<div className="hidden lg:block lg:w-1/4 lg:mr-6 mb-6 lg:mb-0 flex justify-center lg:justify-start">
+            <BrowseCategories />
+          </div>*/}
+
+          <div className="lg:w-3/4">
             <h1 className="text-2xl font-bold mb-4">POPULAR PRODUCTS</h1>
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-              {products.map(product => ( // Use fetched products
+              {filteredProducts.map(product => ( // Use filtered products
                   <Item
                       key={product.id}
                       img={product.img}
