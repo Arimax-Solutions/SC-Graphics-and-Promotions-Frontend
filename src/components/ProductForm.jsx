@@ -20,7 +20,7 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
     description: '',
     category: '',
     subcategory: '',
-    darazLink: '',
+    darazLink: '', // Add darazLink here
     clickCount: '',
     details: []
   });
@@ -172,6 +172,16 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
             className="w-full mb-4 p-2 border rounded"
           />
 
+          {/* Add Daraz Link Section */}
+          <label className="block mb-2">Daraz Link</label>
+          <input
+            type="text"
+            name="darazLink"
+            value={formData.darazLink}
+            onChange={handleChange}
+            className="w-full mb-4 p-2 border rounded"
+          />
+
           {/* Product Details Section */}
           <div className="mb-4">
             <h3 className="text-lg font-semibold mb-2">Add Product Details</h3>
@@ -195,7 +205,7 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
               <button
                 type="button"
                 onClick={addDetail}
-                className="bg-green-500  text-white p-2 rounded"
+                className="bg-green-500 text-white p-2 rounded"
               >
                 Add Detail
               </button>
