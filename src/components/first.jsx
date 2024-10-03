@@ -36,21 +36,21 @@ const Header = ({ title, imageSrc, description }) => {
           {/* Social Media Icons */}
           <div className="flex justify-center md:justify-start mt-10 space-x-6 text-2xl">
             {/* Facebook */}
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
+            <a href="https://www.facebook.com/profile.php?id=100063858852964&mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
               <FaFacebookF />
             </a>
             {/* Instagram */}
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800">
+            <a href="https://www.instagram.com/sc_graphics_and_promotions?igsh=MXE5dnJzdTNoeGUxYQ==" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800">
               <FaInstagram />
             </a>
             {/* TikTok */}
-            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-700">
+            <a href="https://www.tiktok.com/@scgraphicsandpromotions?_t=8pGceF53oKT&_r=1" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-700">
               <FaTiktok />
             </a>
             {/* Twitter */}
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-600">
+            {/*<a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-600">
               <FaTwitter />
-            </a>
+            </a>*/}
           </div>
         </div>
       </div>
