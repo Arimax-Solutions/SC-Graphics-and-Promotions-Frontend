@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import ProductForm from '../components/ProductForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { before } from 'lodash';
 
 const AdminPage = () => {
   const [productList, setProductList] = useState([]);
@@ -65,7 +66,7 @@ const AdminPage = () => {
 
   // Handle form submission (create or update product)
   const handleFormSubmit = async (productData) => {
-    const imageFile = productData.img; // Get the image file from the product data
+    const imageFile = productData.img;
     try {
       await saveProduct(productData, imageFile);
     } catch (error) {
@@ -76,82 +77,59 @@ const AdminPage = () => {
   const saveProduct = async (productData, imageFile) => {
     try {
       let formData = new FormData();
-
-      // Create a new object excluding the 'img' property
       const { img, ...productWithoutImage } = productData;
-
-      // Append product data as a JSON string (without the img field)
       formData.append('product', JSON.stringify(productWithoutImage));
-
-      // Append the image file (with 'img' key as per the backend)
       if (imageFile) {
-        formData.append('img', imageFile); // Ensure 'img' matches backend expectation
+        formData.append('img', imageFile);
       } else {
-        throw new Error('Image file is required'); // Add a condition to throw an error if no image
+        console.error('Image file is required');
+        throw new Error('Image file is required');
       }
-
+  
+      console.log('FormData before sending (POST/PUT):');
+      for (let pair of formData.entries()) {
+        console.log(`${pair[0]}:`, pair[1]);
+      }
+  
       let response;
-
-      // Check if adding a new product
+  
       if (isAddingNew) {
-        // Send POST request with form data
         response = await axios.post('http://localhost:8080/api/v1/products', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data', // Ensure correct content type
-          },
         });
-
-        // Handle the response
+  
         if (response.status === 200) {
           setProductList([...productList, response.data]); // Update the product list
           Swal.fire('Success', 'Product added successfully!', 'success');
         }
       } else {
-        let formData1 = new FormData();
-        
-        // Serialize productData into JSON string and append to formData
-        const productJson = JSON.stringify({
-            title: productData.title,
-            category: productData.category,
-            price: productData.price,
-            description: productData.description
-        });
-        formData1.append('product', productJson); // Append the JSON string under the key 'product'
-  
-        // Append the image file if it exists
-        if (imageFile) {
-          formData1.append('image', imageFile); // Ensure 'image' matches backend expectation
-        } else {
-            throw new Error('Image file is required');
+        console.log('FormData before PUT request:');
+        for (let pair of formData.entries()) {
+          console.log(`${pair[0]}:`, pair[1]);
         }
-
-
-        response = await axios.put(`http://localhost:8080/api/v1/products/${productData.id}`, formData1, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
+  
+        response = await axios.put(`http://localhost:8080/api/v1/products/${productData.id}`, formData, {
         });
-
+  
         if (response.status === 200) {
-          // Update the product list with the updated product
           const updatedList = productList.map((product) =>
-              product.id === productData.id ? response.data : product
+            product.id === productData.id ? response.data : product
           );
           setProductList(updatedList);
           Swal.fire('Success', 'Product updated successfully!', 'success');
-          setInterval(()=>{
+          setTimeout(() => {
             window.location.reload();
-          },3000)
+          }, 3000);
         }
       }
-
-      // Reset form and state after successful operation
       setEditingProduct(null);
       setIsAddingNew(false);
     } catch (error) {
+      console.error('Error during save operation:', error);
       Swal.fire('Error', error.message || 'An error occurred while saving the product!', 'error');
     }
   };
+  
+  
   
 
   return (
