@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import img from '../assets/sign.png'; 
+import logo from '../assets/SCDESIIGN.png'
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -51,6 +52,7 @@ function Login() {
           <div></div>
 
           <div className="flex flex-col justify-center items-center w-full">
+          <img src={logo} className='w-20 rounded' alt="Logo" />
             <h2 className="text-4xl font-extrabold mb-10 text-gray-100">Admin Panel Login</h2>
             <form className="w-full max-w-sm space-y-6" onSubmit={handleLogin}>
               <div className="relative">
