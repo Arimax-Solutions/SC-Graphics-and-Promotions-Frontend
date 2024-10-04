@@ -40,8 +40,14 @@ const SearchBar = () => {
       if (filteredProducts.length > 0) {
         // Load all filtered products on a search results page
         navigate(`/search?query=${searchTerm}`);
+        setSearchTerm(""); // Clear the search term after navigating
       }
     }
+  };
+
+  const handleProductClick = (productId) => {
+    navigate(`/product/${productId}`);
+    setSearchTerm(""); // Clear the search term when a product is clicked
   };
 
   return (
@@ -71,7 +77,7 @@ const SearchBar = () => {
                   <div
                       key={product.id}
                       className="p-3 border-b border-gray-200 hover:bg-gray-100 cursor-pointer text-zinc-900 text-sm"
-                      onClick={() => navigate(`/product/${product.id}`)}
+                      onClick={() => handleProductClick(product.id)} // Use the new click handler
                   >
                     {product.title}
                   </div>
