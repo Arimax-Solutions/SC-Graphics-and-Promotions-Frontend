@@ -130,21 +130,35 @@ const Home = () => {
             <BrowseCategories />
           </div>*/}
 
-          <div className="lg:w-3/4">
-            <h1 className="text-2xl font-bold mb-4">POPULAR PRODUCTS</h1>
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-              {filteredProducts.map(product => ( // Use filtered products
-                  <Item
-                      key={product.id}
-                      img={product.img}
-                      price={`Rs.${product.price.toFixed(2)}`} // Format price
-                      text={product.title}
-                      productId={product.id}
-                  />
-              ))}
-            </div>
+<div className="lg:w-5/6 mx-auto">
+  <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">POPULAR PRODUCTS</h1>
+  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center">
+    {filteredProducts.slice(0, 16).map((product) => (
+      <a
+        key={product.id}
+        href={`/product/${product.id}`} // Link to product details page
+        className="w-full max-w-xs"
+      >
+        <div
+          className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform hover:scale-105 hover:shadow-2xl"
+        >
+          <img
+            src={product.img}
+            alt={product.title}
+            className="w-full h-48 object-cover"
+          />
+          <div className="p-4">
+            <h3 className="text-lg font-semibold text-gray-900">{product.title || 'Untitled'}</h3>
+            <p className="text-blue-600 text-lg font-bold mt-2">{`Rs. ${product.price.toFixed(2)}`}</p>
           </div>
         </div>
+      </a>
+    ))}
+  </div>
+</div>
+
+
+</div>
 
         <div>
           <h1 className="text-3xl font-bold mb-4 pt-10 pl-5">Top Deals</h1>
