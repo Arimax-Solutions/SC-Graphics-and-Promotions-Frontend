@@ -16,9 +16,19 @@ const testimonials = [
         title: "University of Kelaniya",
     },
     {
-        quote: "Highly recommended for any wooden work and advertising. Good job SC graphics. Thank you for done my name board beautifully.",
-        name: "Chathuranga Wimalasena",
-        title: "University of Kelaniya",
+        quote: "quality products and highly recommend.I bought 30 keytags.They are so beautiful & so cute.I love them.good job.keep it up 🥰",
+        name: "Gayaani K Gunawardhana ",
+        title: "University Of The Visual & Performing Arts",
+    },
+    {
+        quote: "I really appreciate the work, creativity and delivery of Chandima and looking forward to get more deliverables through him 👊🏻",
+        name: "Kusal Jayaratne ",
+        title: "University of Peradeniya",
+    },
+    {
+        quote: "Ordered 50 key tags.Came within 04 days.Nice work. Appreciated.Highly Recommended.Thank you SC Graphics. 👊",
+        name: "Isuru Subash  ",
+        
     },
 ];
 
