@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import img from '../assets/sign.png'; 
 import logo from '../assets/SCDESIIGN.png';
+import Swal from "sweetalert2";
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -29,8 +30,9 @@ function Login() {
 
       if (response.ok) {
         const data = await response.json();
-        alert('Login successful');
-        navigate('/admin'); // Navigate to the admin page after successful login
+        await Swal.fire('Success', 'Login successful!', 'success');
+        localStorage.setItem('token', data.token);
+        navigate('/adminadd'); // Navigate to the admin page after successful login
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Login failed');

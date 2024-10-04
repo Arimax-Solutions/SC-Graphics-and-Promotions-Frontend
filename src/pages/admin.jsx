@@ -4,11 +4,26 @@ import Swal from 'sweetalert2';
 import ProductForm from '../components/ProductForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import {useNavigate} from "react-router-dom";
 
 const AdminPage = () => {
+  const navigate = useNavigate();
+  const token = localStorage.getItem('token'); // Retrieve the token from local storage
   const [productList, setProductList] = useState([]);
   const [editingProduct, setEditingProduct] = useState(null);
   const [isAddingNew, setIsAddingNew] = useState(false);
+
+  useEffect(() => {
+    if (!token) {
+      Swal.fire('Error', 'Unauthorized! Please log in.', 'error').then(() => {
+        navigate('/login'); // Redirect to login if no token
+      });
+    }
+  }, [token, navigate]);
+
+  // Return early if there's no token to prevent rendering
+  if (!token) return null;
+
 
   // Fetch product list on component mount
   useEffect(() => {
@@ -118,15 +133,18 @@ const AdminPage = () => {
 
   return (
     <div className="admin-page p-6 pt-24">
+      <h1 className="text-3xl font-bold mb-8 text-center">Product Management</h1>
       <header className="admin-header flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Product Management</h1>
+        <br/>
+        <br/>
         <button
-          onClick={handleAddNew}
-          className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
+            onClick={handleAddNew}
+            className="ml-auto bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
         >
           Add New Product
         </button>
       </header>
+
 
       <main>
         {/* Display the product form at the top if editing or adding a new product */}
@@ -201,6 +219,7 @@ const AdminPage = () => {
             </tbody>
           </table>
         </div>
+
       </main>
     </div>
   );
