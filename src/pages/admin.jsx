@@ -4,7 +4,6 @@ import Swal from 'sweetalert2';
 import ProductForm from '../components/ProductForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { before } from 'lodash';
 
 const AdminPage = () => {
   const [productList, setProductList] = useState([]);
@@ -85,31 +84,19 @@ const AdminPage = () => {
         console.error('Image file is required');
         throw new Error('Image file is required');
       }
-  
-      console.log('FormData before sending (POST/PUT):');
-      for (let pair of formData.entries()) {
-        console.log(`${pair[0]}:`, pair[1]);
-      }
-  
+
       let response;
-  
+
       if (isAddingNew) {
-        response = await axios.post('http://localhost:8080/api/v1/products', formData, {
-        });
-  
+        response = await axios.post('http://localhost:8080/api/v1/products', formData);
+
         if (response.status === 200) {
           setProductList([...productList, response.data]); // Update the product list
           Swal.fire('Success', 'Product added successfully!', 'success');
         }
       } else {
-        console.log('FormData before PUT request:');
-        for (let pair of formData.entries()) {
-          console.log(`${pair[0]}:`, pair[1]);
-        }
-  
-        response = await axios.put(`http://localhost:8080/api/v1/products/${productData.id}`, formData, {
-        });
-  
+        response = await axios.put(`http://localhost:8080/api/v1/products/${productData.id}`, formData);
+
         if (response.status === 200) {
           const updatedList = productList.map((product) =>
             product.id === productData.id ? response.data : product
@@ -128,9 +115,6 @@ const AdminPage = () => {
       Swal.fire('Error', error.message || 'An error occurred while saving the product!', 'error');
     }
   };
-  
-  
-  
 
   return (
     <div className="admin-page p-6 pt-24">
@@ -145,7 +129,20 @@ const AdminPage = () => {
       </header>
 
       <main>
-        <div className="overflow-x-auto">
+        {/* Display the product form at the top if editing or adding a new product */}
+        {editingProduct || isAddingNew ? (
+          <ProductForm
+            product={editingProduct}
+            onSubmit={handleFormSubmit}
+            onCancel={() => {
+              setEditingProduct(null);
+              setIsAddingNew(false);
+            }}
+          />
+        ) : null}
+
+        {/* Product list */}
+        <div className="overflow-x-auto mt-6">
           <table className="w-full text-sm text-left text-gray-500">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
@@ -204,17 +201,6 @@ const AdminPage = () => {
             </tbody>
           </table>
         </div>
-
-        {editingProduct || isAddingNew ? (
-          <ProductForm
-            product={editingProduct}
-            onSubmit={handleFormSubmit}
-            onCancel={() => {
-              setEditingProduct(null);
-              setIsAddingNew(false);
-            }}
-          />
-        ) : null}
       </main>
     </div>
   );
