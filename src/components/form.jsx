@@ -33,7 +33,8 @@ const ContactForm = () => {
                         placeholder="Message" 
                         className="border rounded-lg p-2 w-full mt-4 h-32 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
-                    <button 
+                    <button
+                        href="chanuka.weerakkody123@gmail.com"
                         type="submit" 
                         className="bg-blue-600 text-white font-bold p-2 w-full mt-6 rounded-lg hover:bg-blue-700 transition-colors"
                     >
