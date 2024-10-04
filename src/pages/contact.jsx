@@ -19,9 +19,9 @@ return (
           <Location />
           <div className="sm:ml-12 mt-6 sm:mt-0">
             <p className="text-lg font-medium">SC Graphics and Promotions</p>
-            <p className="text-base mt-2">123 Main Street, Colombo, Sri Lanka</p>
-            <p className="text-base mt-2">Email: contact@scgraphics.com</p>
-            <p className="text-base mt-2">Phone: +94 11 234 5678</p>
+            <p className="text-base mt-2">178/A, Palanwatta, Pannipitiya, Colombo, Sri Lanka 10230</p>
+            <p className="text-base mt-2">Email: scgraphics6@gmail.com</p>
+            <p className="text-base mt-2">Phone: 011 284 0017</p>
             <a
                 href={`https://www.google.com/maps/dir/?api=1&destination=6.8277931,79.9485114`}
                 target="_blank"
