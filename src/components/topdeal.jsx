@@ -7,15 +7,7 @@ import prom5 from '../assets/trop.jpeg';
 import prom6 from '../assets/prom6.jpeg';
 
 const ImageSlideshow = () => {
-  const images = [
-    prom1,
-  prom2,
-  prom3,
-  prom4,
-  prom5,
-  prom6
-  ];
-
+  const images = [prom1, prom2, prom3, prom4, prom5, prom6];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -26,7 +18,7 @@ const ImageSlideshow = () => {
     return () => clearInterval(interval);
   }, [images.length]);
 
-  // Calculate indices of the 4 images that should be shown
+  // Calculate indices of the images that should be shown
   const displayedImages = [
     images[currentIndex],
     images[(currentIndex + 1) % images.length],
@@ -38,8 +30,17 @@ const ImageSlideshow = () => {
     <div className="flex overflow-hidden w-full h-full">
       <div className="flex transition-transform duration-500 ease-in-out">
         {displayedImages.map((image, index) => (
-          <div key={index} className="flex-none w-1/4 h-full p-2">
-            <img src={image} alt={`Slide ${index}`} className="w-full h-full object-cover rounded-md" />
+          <div
+            key={index}
+            className={`flex-none ${
+              index === 0 ? 'w-full md:w-1/4' : 'hidden md:block md:w-1/4'
+            } h-full p-2`}
+          >
+            <img
+              src={image}
+              alt={`Slide ${index}`}
+              className="w-full h-full object-cover rounded-md"
+            />
           </div>
         ))}
       </div>
