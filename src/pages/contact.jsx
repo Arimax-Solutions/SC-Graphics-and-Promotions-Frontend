@@ -23,7 +23,7 @@ return (
             <p className="text-base mt-2">Email: scgraphics6@gmail.com</p>
             <p className="text-base mt-2">Phone: 011 284 0017</p>
             <a
-                href={`https://www.google.com/maps/dir/?api=1&destination=6.8277931,79.9485114`}
+                href={`https://maps.app.goo.gl/vUadsx3SH1fcizws8`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

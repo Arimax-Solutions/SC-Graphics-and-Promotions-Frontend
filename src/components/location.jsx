@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
 const LocationMap = () => {
-  const position = [6.8406, 79.9604]; // Your location coordinates
+  const position = [6.827698002781762, 79.95603536077563]; // Your location coordinates
 
   const icon = L.icon({
     iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
