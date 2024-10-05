@@ -105,7 +105,6 @@ const Home = () => {
           <ThemeProvider />
         </div>
 
-      
 
         <div className="flex flex-col lg:flex-row m-4 px-0 lg:px-0 py-10">
           {/*<div className="hidden lg:block lg:w-1/4 lg:mr-6 mb-6 lg:mb-0 flex justify-center lg:justify-start">
