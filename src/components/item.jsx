@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios'; // Import axios for making API calls
 
 const Item = ({ img, price, text, productId }) => {
+
+  const backendUrl = process.env.VITE_BACKEND_URL;
+
   if (!productId) {
     console.error("Product ID is missing for the Item component.");
     return <div className="text-red-500">Product not available</div>; // Fallback UI
@@ -11,7 +14,7 @@ const Item = ({ img, price, text, productId }) => {
   const handleClick = async () => {
     try {
       // Call the API to increment the click count
-      await axios.post(`http://localhost:8080/api/v1/products/click/count/${productId}`);
+      await axios.post(`${backendUrl}/api/v1/products/click/count/${productId}`);
     } catch (error) {
       console.error("Error incrementing click count:", error);
     }

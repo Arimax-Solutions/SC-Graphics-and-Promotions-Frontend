@@ -7,9 +7,11 @@ const ProductDetails = () => {
     // const router = useRouter(); // For Next.js
     const [product, setProduct] = useState(null);
 
+    const backendUrl = process.env.VITE_BACKEND_URL;
+
     useEffect(() => {
         const fetchProductDetails = async () => {
-            const response = await fetch(`http://localhost:8080/api/v1/products/${id}`);
+            const response = await fetch(`${backendUrl}/api/v1/products/${id}`);
             const data = await response.json();
             setProduct(data);
         };

@@ -13,6 +13,8 @@ const AdminPage = () => {
   const [editingProduct, setEditingProduct] = useState(null);
   const [isAddingNew, setIsAddingNew] = useState(false);
 
+  const backendUrl = process.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     if (!token) {
       Swal.fire('Error', 'Unauthorized! Please log in.', 'error').then(() => {
@@ -29,7 +31,8 @@ const AdminPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/products');
+        //const response = await axios.get('http://localhost:8080/api/v1/products');
+        const response = await axios.get(`${backendUrl}/api/v1/products`);
         setProductList(response.data);
       } catch (error) {
         Swal.fire('Error', 'Error fetching products!', 'error');
@@ -58,7 +61,7 @@ const AdminPage = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await axios.delete(`http://localhost:8080/api/v1/products/${id}`);
+          const response = await axios.delete(`${backendUrl}/api/v1/products/${id}`);
           if (response.status === 204) {
             setProductList(productList.filter((product) => product.id !== id));
             Swal.fire('Deleted!', 'Product has been deleted.', 'success');
@@ -103,14 +106,14 @@ const AdminPage = () => {
       let response;
 
       if (isAddingNew) {
-        response = await axios.post('http://localhost:8080/api/v1/products', formData);
+        response = await axios.post(`${backendUrl}/api/v1/products`, formData);
 
         if (response.status === 200) {
           setProductList([...productList, response.data]); // Update the product list
           Swal.fire('Success', 'Product added successfully!', 'success');
         }
       } else {
-        response = await axios.put(`http://localhost:8080/api/v1/products/${productData.id}`, formData);
+        response = await axios.put(`${backendUrl}/api/v1/products/${productData.id}`, formData);
 
         if (response.status === 200) {
           const updatedList = productList.map((product) =>

@@ -13,19 +13,19 @@ export default defineConfig({
       ],
     },
   },
+  define: {
+    'process.env.VITE_BACKEND_URL': JSON.stringify('http://localhost:8080'),
+  },
   build: {
     rollupOptions: {
       output: {
-        // Automatically split vendor libraries into separate chunks
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            // Create a separate chunk for each library in node_modules
             return id.toString().split('node_modules/')[1].split('/')[0];
           }
         },
       },
     },
-    // Optional: Adjust the chunk size warning limit to avoid warnings
-    chunkSizeWarningLimit: 1000, // Increase this limit if you still see warnings for large chunks
+    chunkSizeWarningLimit: 1000,
   },
 });

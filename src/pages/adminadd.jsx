@@ -20,6 +20,8 @@ function AdminTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedAdmin, setSelectedAdmin] = useState(null);
 
+  const backendUrl = process.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     if (!token) {
       Swal.fire('Error', 'Unauthorized! Please log in.', 'error').then(() => {
@@ -34,7 +36,8 @@ function AdminTable() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:8080/auth');
+        //const response = await fetch('http://localhost:8080/auth');
+        const response = await fetch(`${backendUrl}/auth`);
         const result = await response.json();
         if (result.status === 200) {
           setAdmins(result.data);
@@ -81,7 +84,7 @@ function AdminTable() {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/auth/register', {
+      const response = await fetch(`${backendUrl}/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -119,7 +122,7 @@ function AdminTable() {
       };
 
       try {
-        const response = await fetch(`http://localhost:8080/auth/${selectedAdmin.user_id}`, {
+        const response = await fetch(`${backendUrl}/auth/${selectedAdmin.user_id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -153,7 +156,7 @@ function AdminTable() {
       if (!isConfirmed) return;
 
       try {
-        const response = await fetch(`http://localhost:8080/auth/${selectedAdmin.user_id}`, {
+        const response = await fetch(`${backendUrl}/auth/${selectedAdmin.user_id}`, {
           method: 'DELETE',
         });
 
@@ -169,8 +172,6 @@ function AdminTable() {
         await Swal.fire('Error', 'There was an error deleting the admin', 'error');
       }
     };
-
-
 
 
     return (
