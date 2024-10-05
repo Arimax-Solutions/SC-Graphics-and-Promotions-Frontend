@@ -134,7 +134,8 @@ const Home = () => {
       {/* Popular Products Section */}
       <div className="flex flex-col lg:flex-row m-4 px-0 lg:px-0">
         <div className="lg:w-5/6 mx-auto">
-          <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">POPULAR PRODUCTS</h1>
+        <h1 className="text-4xl font-bold mb-8 text-center text-orange-600 font-poppins">POPULAR PRODUCTS</h1>
+
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
             {filteredProducts.slice(0, 16).map((product) => (
               <a
