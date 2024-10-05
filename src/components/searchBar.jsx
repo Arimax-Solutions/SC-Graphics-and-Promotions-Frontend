@@ -8,11 +8,13 @@ const SearchBar = () => {
   const [allProducts, setAllProducts] = useState([]); // To store all products fetched from API
   const navigate = useNavigate();
 
+  const backendUrl = process.env.VITE_BACKEND_URL;
+
   // Fetch all products from the API on component mount
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/v1/products");
+        const response = await fetch(`${backendUrl}/api/v1/products`);
         const data = await response.json();
         setAllProducts(data); // Store all products in state
       } catch (error) {

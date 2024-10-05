@@ -10,6 +10,8 @@ function Login() {
   const [error, setError] = useState(null);
   const navigate = useNavigate(); // Use hook for navigation
 
+  const backendUrl = process.env.VITE_BACKEND_URL;
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setError(null);
@@ -20,7 +22,7 @@ function Login() {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/auth/login', {
+      const response = await fetch(`${backendUrl}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -19,10 +19,12 @@ const ShoppingPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null); // Error state
 
+  const backendUrl = process.env.VITE_BACKEND_URL;
+
   // Fetch products from the API
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/products');
+      const response = await axios.get(`${backendUrl}/api/v1/products`);
       setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);

@@ -24,6 +24,8 @@ const Home = () => {
   const [products, setProducts] = useState([]); // State to store fetched products
   const [selectedCategory, setSelectedCategory] = useState('All'); // State to track selected category
 
+  const backendUrl = process.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setAnimationEnded(true);
@@ -34,7 +36,7 @@ const Home = () => {
   // Fetch popular products from the API
   const fetchPopularProducts = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/v1/products/popular");
+      const response = await fetch(`${backendUrl}/api/v1/products/popular`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -60,6 +62,43 @@ const Home = () => {
       : products.filter(product => product.category === selectedCategory);
 
   return (
+    <>
+      {/* Hero Section */}
+      <div className={`relative flex flex-col-reverse lg:flex-row items-center bg-white pt-0 pb-0 lg:p-24 ${animationEnded ? 'animate-blur-effect' : ''}`}>
+        {/* Left Side - Text */}
+        <div className="w-full lg:w-1/2 text-center lg:text-left mb-8 lg:mb-0 relative z-10 p-4">
+          <h1 className={`text-3xl sm:text-4xl lg:text-6xl font-bold text-blue-600 ${animationEnded ? 'animate-blur' : 'animate-fade-in'}`}>
+            Crafting Unique Graphics,<br />
+            Customizing Perfect Gifts
+          </h1>
+          <h2 className={`text-2xl sm:text-3xl lg:text-5xl font-bold text-blue-400 mt-4 ${animationEnded ? 'animate-blur' : 'animate-fade-in'}`}>
+            Let’s Make Your Vision Alive!
+          </h2>
+          <p className={`text-gray-600 mt-4 ${animationEnded ? 'animate-blur' : 'animate-fade-in'}`}>
+            "Explore a curated selection of creative graphics and personalized gifts,
+            crafted to make every occasion special. We bring your ideas to life with quality and care."
+          </p>
+          <div className={`mt-8 flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 ${animationEnded ? 'animate-blur' : 'animate-fade-in'}`}>
+      <a
+        href="tel:0112840017"
+        className="w-full sm:w-auto bg-blue-900 text-white py-2 px-4 rounded-md flex items-center justify-center hover:bg-blue-800 active:bg-blue-700 active:scale-95 transition-all duration-150"
+      >
+        📞 <span className="ml-2">Contact Us</span>
+      </a>
+      <a
+        href="https://www.daraz.lk/shop/sc-promotions"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-full sm:w-auto flex items-center justify-center"
+      >
+        <button
+          className="w-full sm:w-auto bg-orange-600 text-white py-2 px-4 rounded-md flex items-center justify-center hover:bg-orange-500 active:bg-orange-700 active:scale-95 transition-all duration-150"
+        >
+          <img src={darz} alt="Darz Logo" className="mr-2 h-6 w-6" style={{ filter: 'brightness(0) invert(1)' }} />
+          Buy Now
+        </button>
+      </a>
+    </div>
       <>
         <div className={`relative flex flex-col-reverse lg:flex-row items-center bg-white pt-0 pb-0 lg:pb lg:p-24 ${animationEnded ? 'animate-blur-effect' : ''}`}>
           {/* Left Side - Text (Mobile: Below Image) */}
@@ -123,7 +162,6 @@ const Home = () => {
     </button>
   ))}
 </div>
-
         <div className="flex flex-col lg:flex-row m-4 px-0 lg:px-0">
           {/*<div className="hidden lg:block lg:w-1/4 lg:mr-6 mb-6 lg:mb-0 flex justify-center lg:justify-start">
             <BrowseCategories />

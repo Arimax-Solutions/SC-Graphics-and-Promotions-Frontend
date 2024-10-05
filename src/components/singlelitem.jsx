@@ -8,10 +8,12 @@ const SingleItemPage = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const backendUrl = process.env.VITE_BACKEND_URL;
+
   // Fetch the product details based on productId
   const fetchProduct = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/v1/products/${productId}`);
+      const response = await axios.get(`${backendUrl}/api/v1/products/${productId}`);
       setProduct(response.data);
       setLoading(false);
     } catch (error) {
