@@ -113,7 +113,7 @@ const Home = () => {
           </div>*/}
 
 <div className="sm:bg-gray-100 rounded-3xl lg:w-5/6 mx-auto pb-10">
-  <h1 className="text-3xl font-bold mt-5 ml-5 mb-8 text-left text-gray-800">Popular Products</h1>
+  <h1 className="text-3xl font-bold mt-5 ml-5 mb-8 text-left text-gray-800">More to Love</h1>
    {/* Category Buttons - Responsive for Mobile */}
    <div className={`flex flex-wrap justify-center gap-2 mt-4 px-4 overflow-x-auto scrollbar-hide ${animationEnded ? 'animate-blur' : ''}`}>
         <button
