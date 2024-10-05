@@ -20,18 +20,21 @@ function App() {
   return (
     <div className="px-4 md:px-24 py-24 ">
       <Header
-        title="Graphic Designing"
+        title="Trophy Designing"
         imageSrc={prom5}
-        description="SC Graphics and Promotions specializes in high-quality graphic design services, including eye-catching post designs and unique logo creation. Whether you're looking to create a striking social media post, develop a memorable brand identity, or design promotional materials, SC Graphics and Promotions combines creativity with professionalism to bring your vision to life. The shop's website showcases a portfolio of diverse projects, demonstrating expertise in transforming ideas into visually compelling designs that capture the essence of your brand."
+        description="SC Graphics and Promotions offers premium trophy design services, crafting custom awards that celebrate achievements with style and elegance.
+        Whether for corporate events, sports competitions, or special occasions, each trophy is meticulously designed to reflect the significance of the moment.
+        From sleek modern designs to classic, timeless pieces, SC Graphics and Promotions ensures every trophy is a stunning representation of excellence and recognition.
+        Let us help you honor success with a design that stands out and leaves a lasting impression"
       />
             <div className='pt-6 '>
         <h1 className='font-serif font-bold text-2xl pb-4'>Service Details</h1>
-        <p className='font-sans font-medium leading-relaxed' >SC Graphics and Promotions offers customized items like unique gifts, elegant wedding cards, personalized name boards, custom mugs, and stylish photo 
-frames. Our pricing is competitive and based on item complexity, with detailed quotes provided upfront. Most items are completed and shipped within 7-10 
-business days, with expedited options available. We provide up to two rounds of revisions, with additional revisions available for a fee. A 50% deposit is 
-required to start, with the balance due upon completion before delivery. We accept various secure payment methods and ensure strict confidentiality of 
-client information. For more details or to place an order, visit our website or contact us directly.</p>
-
+        <p className='font-sans font-medium leading-relaxed' >SC Graphics and Promotions specializes in designing customized trophies for all occasions,
+            including corporate awards, sports achievements, and special events. Our trophies are crafted with precision, offering a range of materials
+            and designs to suit your style and budget. Pricing is competitive and based on the complexity of the design, with detailed quotes provided upfront.
+            Standard turnaround time is 7-10 business days, with expedited options available. We offer up to two rounds of revisions to ensure your satisfaction,
+            with additional revisions available for a fee. A 50% deposit is required to begin, with the balance due upon completion before delivery.
+            Secure payment options and strict confidentiality are guaranteed. For more details or to place an order, visit our website or contact us directly..</p>
       </div>
       <ImageGallery images={images} />
     </div>
