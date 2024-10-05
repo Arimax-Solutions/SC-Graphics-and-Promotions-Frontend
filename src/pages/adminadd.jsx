@@ -32,23 +32,23 @@ function AdminTable() {
 
   // Return early if there's no token to prevent rendering
   if (!token) return null;
+  const fetchUsers = async () => {
+    try {
+      //const response = await fetch('http://localhost:8080/auth');
+      const response = await fetch(`${backendUrl}/auth`);
+      const result = await response.json();
+      if (result.status === 200) {
+        setAdmins(result.data);
+      } else {
+        console.error('Failed to fetch users');
+      }
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
+
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        //const response = await fetch('http://localhost:8080/auth');
-        const response = await fetch(`${backendUrl}/auth`);
-        const result = await response.json();
-        if (result.status === 200) {
-          setAdmins(result.data);
-        } else {
-          console.error('Failed to fetch users');
-        }
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    };
-
     fetchUsers();
   }, []);
 
@@ -99,6 +99,7 @@ function AdminTable() {
       const result = await response.json();
       console.log('Admin registered successfully:', result);
       await Swal.fire('Success', 'Admin registered successfully!', 'success');
+      fetchUsers();
     } catch (error) {
       console.error('Error registering admin:', error);
     }
@@ -136,6 +137,7 @@ function AdminTable() {
 
         const result = await response.json();
         await Swal.fire('Success', 'Admin updated successfully!', 'success');
+        fetchUsers();
         setIsModalOpen(false);
         // Optionally, refresh the admin list or update state
       } catch (error) {
@@ -154,6 +156,7 @@ function AdminTable() {
       });
 
       if (!isConfirmed) return;
+      fetchUsers();
 
       try {
         const response = await fetch(`${backendUrl}/auth/${selectedAdmin.user_id}`, {
