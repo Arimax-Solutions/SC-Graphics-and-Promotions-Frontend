@@ -269,7 +269,6 @@ function AdminTable() {
       <h1 className="text-3xl font-bold mb-8 text-center">Admin Management</h1>
       <header className="admin-header flex justify-between items-center mb-6">
         <br/>
-        <br/>
         <button
             onClick={() => setIsFormVisible(!isFormVisible)} // Toggle form visibility
             className="ml-auto bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
@@ -277,45 +276,6 @@ function AdminTable() {
           Add New User
         </button>
       </header>
-
-      {/* User list */}
-      <div className="overflow-x-auto mt-6">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-          <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact Number</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-          </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-          {admins.length > 0 ? (
-              admins.map((admin) => (
-                  <tr key={admin.user_id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{admin.name}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{admin.username}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{admin.email}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{admin.contact_number}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      <button onClick={() => handleViewClick(admin)} className="text-blue-600 hover:text-blue-900">
-                        <FontAwesomeIcon icon={faEye} />
-                      </button>
-                    </td>
-                  </tr>
-              ))
-          ) : (
-              <tr>
-                <td colSpan="4" className="py-4 px-6 text-center text-gray-500">
-                  No users found.
-                </td>
-              </tr>
-          )}
-          </tbody>
-        </table>
-      </div>
-
 
       {isFormVisible && (
           <div className="bg-white p-8 shadow-lg rounded-lg w-full max-w-4xl mx-auto mt-4">
@@ -397,6 +357,128 @@ function AdminTable() {
             </form>
           </div>
       )}
+      <br/>
+      <br/>
+
+      {/* User list */}
+      <div className="overflow-x-auto mt-6">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+          <tr>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact Number</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+          </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+          {admins.length > 0 ? (
+              admins.map((admin) => (
+                  <tr key={admin.user_id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{admin.name}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{admin.username}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{admin.email}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{admin.contact_number}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      <button onClick={() => handleViewClick(admin)} className="text-blue-600 hover:text-blue-900">
+                        <FontAwesomeIcon icon={faEye} />
+                      </button>
+                    </td>
+                  </tr>
+              ))
+          ) : (
+              <tr>
+                <td colSpan="4" className="py-4 px-6 text-center text-gray-500">
+                  No users found.
+                </td>
+              </tr>
+          )}
+          </tbody>
+        </table>
+      </div>
+
+
+      {/*{isFormVisible && (
+          <div className="bg-white p-8 shadow-lg rounded-lg w-full max-w-4xl mx-auto mt-4">
+            <h2 className="text-xl font-bold mb-6 text-center">Add New Admin</h2>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                <div className="flex-1">
+                  <label className="block text-sm font-medium text-gray-700" htmlFor="name">Full Name</label>
+                  <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      value={newAdmin.name}
+                      onChange={handleChange}
+                      required
+                      className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="Enter full name"
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="block text-sm font-medium text-gray-700" htmlFor="username">Username</label>
+                  <input
+                      id="username"
+                      name="username"
+                      type="text"
+                      value={newAdmin.username}
+                      onChange={handleChange}
+                      required
+                      className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="Enter username"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700" htmlFor="email">Email</label>
+                <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={newAdmin.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter email"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700" htmlFor="contactNumber">Contact Number</label>
+                <input
+                    id="contactNumber"
+                    name="contactNumber"
+                    type="text"
+                    value={newAdmin.contactNumber}
+                    onChange={handleChange}
+                    required
+                    className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter contact number"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700" htmlFor="password">Password</label>
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    value={newAdmin.password}
+                    onChange={handleChange}
+                    required
+                    className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter password"
+                />
+              </div>
+              <button
+                  type="submit"
+                  className="w-full py-3 mt-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-200"
+              >
+                Add Admin
+              </button>
+            </form>
+          </div>
+      )}*/}
       <br/>
       <br/>
       <Modal />
