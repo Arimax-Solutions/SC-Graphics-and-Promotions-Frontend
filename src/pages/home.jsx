@@ -106,6 +106,7 @@ const Home = () => {
         </div>
 
 
+
         <div className="flex flex-col lg:flex-row m-4 px-0 lg:px-0 py-10">
           {/*<div className="hidden lg:block lg:w-1/4 lg:mr-6 mb-6 lg:mb-0 flex justify-center lg:justify-start">
             <BrowseCategories />
@@ -159,7 +160,7 @@ const Home = () => {
 
 
 </div>
-<div className="mx-5 bg-orange-400 p-5 rounded-3xl shadow-md">
+<div className="mx-5 bg-gray-100 p-5 rounded-3xl shadow-md">
 <h1 className="text-3xl font-bold italic mb-4">
             Super
             <span className="text-red-500 font-bold italic">Deals</span>
