@@ -33,7 +33,7 @@ const Navbar = () => {
   return (
       <nav
           className={`fixed w-full z-50 text-white text-base sm:text-lg lg:text-xl font-mono p-1 shadow-md transition-all duration-300 
-        ${isOpen ? 'bg-blue-500' : 'bg-gray-700 bg-opacity-50'}`}
+        ${isOpen ? 'bg-blue-500' : 'bg-blue-900 bg-opacity-80'}`}
       >
         <div className="container mx-auto flex justify-between items-center p-4">
           <div className="flex items-center w-full lg:w-auto justify-between lg:justify-start">

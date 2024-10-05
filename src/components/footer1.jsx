@@ -1,6 +1,9 @@
 import React from "react";
 import logo from '../assets/SCicon.png'
 import { FaFacebookF, FaInstagram, FaTiktok, FaTwitter } from 'react-icons/fa';
+import visaLogo from '../assets/visa.png'
+import mastercardLogo from '../assets/master.png'
+
 const Footer = () => {
   return (
     <footer className="bg-[#1e294e] text-white py-8">
@@ -49,16 +52,17 @@ const Footer = () => {
           </div>
 
           {/* Right Section */}
-          <div className="text-center md:text-left">
-            <h3 className="font-bold mb-2">Useful Links</h3>
-            <ul className="space-y-2">
-              <li><a href="#" className="hover:underline">Privacy Policy</a></li>
-              <li><a href="#" className="hover:underline">FAQ</a></li>
-              <li><a href="#" className="hover:underline">Terms and Conditions</a></li>
-              <li><a href="/shop" className="hover:underline">Store</a></li>
-              <li><a href="/contact" className="hover:underline">Contact Us</a></li>
-            </ul>
-          </div>
+          
+          <div className="bg-gray-800 bg-opacity-30 text-white p-6 rounded-md text-center">
+      <h3 className="font-bold mb-4 text-xl">WE ACCEPT</h3>
+      <div className="flex justify-center items-center mb-4">
+        <img src={visaLogo} alt="Visa" className="h-8 mx-2" />
+        <img src={mastercardLogo} alt="MasterCard" className="h-8 mx-2" />
+      </div>
+      <p className="text-sm">
+        We accept all credit /<br/> debit cards at our <br/> main show room <br/>for non discounted <br/>payments
+      </p>
+    </div>
         </div>
         <div className="border-t border-white mt-6"></div>
         <div className="text-center mt-6">
