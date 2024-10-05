@@ -79,17 +79,18 @@ const Home = () => {
               crafted to make every occasion special. We bring your ideas to life with quality and care."
             </p>
             <div className={`mt-8 flex flex-col sm:flex-row justify-center lg:justify-start ${animationEnded ? 'animate-blur' : 'animate-fade-in'}`}>
-            <a href="tel:0112840017" className="bg-blue-900 text-white py-2 px-4 rounded-md mb-4 sm:mb-0 sm:mr-4 flex items-center justify-center hover:bg-blue-800 active:bg-blue-700 active:scale-95 transition-all duration-150">
-      <FontAwesomeIcon icon={faPhone} className="text-white" />
-      <span className="ml-2">Contact Us</span>
-    </a>
-              <a href="https://www.daraz.lk/shop/sc-promotions" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
-                <button className="bg-orange-600 text-white py-2 px-4 rounded-md flex items-center hover:bg-orange-500 active:bg-orange-700 active:scale-95 transition-all duration-150">
-                  <img src={darz} alt="Darz Logo" className="mr-2 h-6 w-6" style={{ filter: 'brightness(0) invert(1)' }} />
-                  Buy Now
-                </button>
-              </a>
-            </div>
+  <a href="tel:0112840017" className="bg-blue-900 text-white py-2 px-4 rounded-md mb-4 sm:mb-0 sm:mr-4 flex items-center justify-center hover:bg-blue-800 active:bg-blue-700 active:scale-95 transition-all duration-150 w-full sm:w-36">
+    <FontAwesomeIcon icon={faPhone} className="text-white" />
+    <span className="ml-2">Contact Us</span>
+  </a>
+  <a href="https://www.daraz.lk/shop/sc-promotions" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full sm:w-auto">
+    <button className="bg-orange-600 text-white py-2 px-4 rounded-md flex items-center justify-center hover:bg-orange-500 active:bg-orange-700 active:scale-95 transition-all duration-150 w-full sm:w-36">
+      <img src={darz} alt="Darz Logo" className="mr-2 h-6 w-6" style={{ filter: 'brightness(0) invert(1)' }} />
+      Buy Now
+    </button>
+  </a>
+</div>
+
           </div>
 
           {/* Right Side - Image (Mobile: Above Text) */}
