@@ -36,13 +36,13 @@ const Footer = () => {
 
           {/* Middle Section */}
           <div className="text-center md:text-left mb-6 md:mb-0">
-            <h3 className="font-bold mb-2">Categories</h3>
+            <h3 className="font-bold mb-2">Services</h3>
             <ul className="space-y-2">
               <li><a href="/grapic" className="hover:underline">Graphic Designing</a></li>
               <li><a href="/lacer" className="hover:underline">Laser Works</a></li>
               <li><a href="/keytags" className="hover:underline">Key Tags / Magnet Tags</a></li>
-              <li><a href="/shop" className="hover:underline">Name Boards</a></li>
-              <li><a href="shop" className="hover:underline">Gift Items</a></li>
+              {/*<li><a href="/shop" className="hover:underline">Name Boards</a></li>
+              <li><a href="shop" className="hover:underline">Gift Items</a></li>*/}
               <li><a href="/custmise" className="hover:underline">Customized Items</a></li>
               <li><a href="/tropy" className="hover:underline">Trophy</a></li>
             </ul>

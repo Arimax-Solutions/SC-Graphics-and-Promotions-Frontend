@@ -22,15 +22,19 @@ function App() {
       <Header
         title="Key Tags / Magnet Tags"
         imageSrc={prom2}
-        description="SC Graphics and Promotions specializes in high-quality graphic design services, including eye-catching post designs and unique logo creation. Whether you're looking to create a striking social media post, develop a memorable brand identity, or design promotional materials, SC Graphics and Promotions combines creativity with professionalism to bring your vision to life. The shop's website showcases a portfolio of diverse projects, demonstrating expertise in transforming ideas into visually compelling designs that capture the essence of your brand."
+        description="
+SC Graphics and Promotions specializes in creating custom key tags and magnetic tags, designed to be both functional and visually appealing. Whether you need branded key tags for
+ your business, personalized tags for special events, or durable magnetic tags for easy identification, we offer a variety of materials and styles to suit your needs.
+ Our portfolio highlights a diverse range of designs, showcasing our ability to transform your ideas into high-quality, custom tags. With a focus on precision and creativity,
+ SC Graphics and Promotions delivers products that make a lasting impression. Let us help you create custom key and magnetic tags that stand out!"
       />
             <div className='pt-6 '>
         <h1 className='font-serif font-bold text-2xl pb-4'>Service Details</h1>
-        <p className='font-sans font-medium leading-relaxed' >SC Graphics and Promotions offers customized items like unique gifts, elegant wedding cards, personalized name boards, custom mugs, and stylish photo 
-frames. Our pricing is competitive and based on item complexity, with detailed quotes provided upfront. Most items are completed and shipped within 7-10 
-business days, with expedited options available. We provide up to two rounds of revisions, with additional revisions available for a fee. A 50% deposit is 
-required to start, with the balance due upon completion before delivery. We accept various secure payment methods and ensure strict confidentiality of 
-client information. For more details or to place an order, visit our website or contact us directly.</p>
+        <p className='font-sans font-medium leading-relaxed' >SC Graphics and Promotions offers high-quality custom key tags and magnetic tags, perfect for branding, special
+            events, or personalized gifts. Our pricing is competitive and based on design complexity, with detailed quotes provided upfront. Most tags are crafted and shipped
+            within 7-10 business days, with expedited options available. We offer up to two rounds of revisions to ensure your design is perfect, with additional revisions
+            available for a fee. A 50% deposit is required to begin, with the balance due upon completion before delivery. We accept secure payment methods and ensure strict
+            confidentiality of client information. For more details or to place an order, visit our website or contact us directly..</p>
 
       </div>
       <ImageGallery images={images} />

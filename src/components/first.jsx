@@ -23,15 +23,26 @@ const Header = ({ title, imageSrc, description }) => {
             {description}
           </p>
 
-          {/* Buttons */}
           <div className="flex flex-col md:flex-row mt-10 space-y-4 md:space-y-0 md:space-x-4">
-            <button className="bg-blue-800 text-white px-6 py-2 rounded w-full md:w-auto">
+            {/* Contact Us Button */}
+            <button
+                onClick={() => window.location.href = "mailto:scgraphics6@gmail.com"}
+                className="bg-blue-800 text-white px-6 py-2 rounded w-full md:w-auto"
+            >
               Contact Us
             </button>
-            <button className="bg-orange-600 text-white px-6 py-2 rounded w-full md:w-auto">
+
+            {/* Buy Now Button */}
+            <a
+                href="https://www.daraz.lk/shop/sc-promotions"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-orange-600 text-white px-6 py-2 rounded w-full md:w-auto text-center"
+            >
               Buy Now
-            </button>
+            </a>
           </div>
+
 
           {/* Social Media Icons */}
           <div className="flex justify-center md:justify-start mt-10 space-x-6 text-2xl">
