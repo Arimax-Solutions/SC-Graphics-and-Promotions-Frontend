@@ -107,13 +107,13 @@ const Home = () => {
 
       
 
-        <div className="flex flex-col lg:flex-row m-4 px-0 lg:px-0">
+        <div className="flex flex-col lg:flex-row m-4 px-0 lg:px-0 py-10">
           {/*<div className="hidden lg:block lg:w-1/4 lg:mr-6 mb-6 lg:mb-0 flex justify-center lg:justify-start">
             <BrowseCategories />
           </div>*/}
 
-<div className="sm:bg-gray-100 rounded-3xl lg:w-5/6 mx-auto pb-10">
-  <h1 className="text-3xl font-bold mt-5 ml-5 mb-8 text-left text-gray-800">More to Love</h1>
+<div className="sm:bg-gray-100 rounded-3xl lg:w-5/6 mx-auto pb-2">
+  <h1 className="text-2xl font-bold mt-5 ml-5 mb-8 text-left text-gray-800">More to Love</h1>
    {/* Category Buttons - Responsive for Mobile */}
    <div className={`flex flex-wrap justify-center gap-2 mt-4 px-4 overflow-x-auto scrollbar-hide ${animationEnded ? 'animate-blur' : ''}`}>
         <button

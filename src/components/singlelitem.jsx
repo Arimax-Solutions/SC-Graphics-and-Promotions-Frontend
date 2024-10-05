@@ -99,7 +99,7 @@ const SingleItemPage = () => {
         </div>
 
         {/* Product Details Card */}
-        <div className="w-full max-w-4xl mx-auto mt-10 bg-white rounded-3xl shadow-xl p-6">
+        <div className="w-full max-w-4xl mx-auto mt-10 bg-gradient-to-b from-red-100 via-red-50 to-white rounded-3xl shadow-xl p-6">
           <h2 className="text-2xl lg:text-3xl font-semibold text-gray-800 mb-6 text-center lg:text-left">
             Product Details
           </h2>
