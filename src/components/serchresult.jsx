@@ -39,8 +39,8 @@ const SearchResults = () => {
   }, [products, query]);
 
   return (
-      <div className="pt-24 px-4">
-        <h2 className="text-4xl font-extrabold mb-8 text-center text-gray-800">
+      <div className="pt-24  px-4">
+        <h2 className="text-2xl bg-yellow-200 rounded-md py-2 font-mono mb-8 text-center text-gray-800">
           Search Results for "<span className="text-indigo-600">{query}</span>"
         </h2>
 
@@ -49,7 +49,7 @@ const SearchResults = () => {
         ) : (
             <>
               {filteredProducts.length > 0 ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 animate-fadeIn">
+                  <div className="bg-gray-100 p-8 grid rounded-3xl grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 animate-fadeIn">
                     {filteredProducts.map((product) => (
                         <div key={product.id} className="transform hover:scale-105 transition-transform duration-300">
                           <Item
