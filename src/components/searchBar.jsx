@@ -57,8 +57,8 @@ const SearchBar = () => {
         <form className="relative">
           <input
               type="search"
-              placeholder="Search products..."
-              className="w-full py-4 pl-10 pr-4 rounded-full bg-gray-100 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+              placeholder="Search products"
+              className="w-full py-4 pl-10 pr-10 rounded-full bg-gray-100 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
               value={searchTerm}
               onChange={handleSearch}
               onKeyPress={handleKeyPress}
@@ -66,7 +66,7 @@ const SearchBar = () => {
           />
           <button
               type="submit"
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
               onClick={(e) => e.preventDefault()}
           >
             <AiOutlineSearch size={20} />

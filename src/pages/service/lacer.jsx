@@ -21,15 +21,20 @@ function App() {
       <Header
         title="Laser Works"
         imageSrc={prom3}
-        description="SC Graphics and Promotions specializes in high-quality graphic design services, including eye-catching post designs and unique logo creation. Whether you're looking to create a striking social media post, develop a memorable brand identity, or design promotional materials, SC Graphics and Promotions combines creativity with professionalism to bring your vision to life. The shop's website showcases a portfolio of diverse projects, demonstrating expertise in transforming ideas into visually compelling designs that capture the essence of your brand."
+        description="SC Graphics and Promotions specializes in precision laser engraving services, offering custom designs on a variety of materials including wood, metal,
+        glass, and acrylic. Whether you need personalized gifts, engraved corporate awards, custom signage, or decorative pieces, SC Graphics and Promotions combines
+        accuracy and artistry to deliver exceptional results. Our portfolio showcases a wide range of projects, reflecting our expertise in transforming ideas
+        into beautifully crafted, laser-engraved works that make a lasting impression. Let us help you create something unique and meaningful with our professional laser
+        engraving services."
       />
             <div className='pt-6 '>
         <h1 className='font-serif font-bold text-2xl pb-4'>Service Details</h1>
-        <p className='font-sans font-medium leading-relaxed' >SC Graphics and Promotions offers customized items like unique gifts, elegant wedding cards, personalized name boards, custom mugs, and stylish photo 
-frames. Our pricing is competitive and based on item complexity, with detailed quotes provided upfront. Most items are completed and shipped within 7-10 
-business days, with expedited options available. We provide up to two rounds of revisions, with additional revisions available for a fee. A 50% deposit is 
-required to start, with the balance due upon completion before delivery. We accept various secure payment methods and ensure strict confidentiality of 
-client information. For more details or to place an order, visit our website or contact us directly.</p>
+        <p className='font-sans font-medium leading-relaxed' >
+            SC Graphics and Promotions offers precision laser engraving services for a wide range of items, including personalized gifts, custom nameplates, corporate awards,
+            and more. Our pricing is competitive and based on the intricacy of the design, with detailed quotes provided upfront. Most laser-engraved items are completed within
+            7-10 business days, with expedited options available. We provide up to two rounds of revisions to ensure your satisfaction, with additional revisions available for a
+            fee. A 50% deposit is required to start, with the balance due upon completion before delivery. We accept secure payment methods and ensure strict confidentiality
+            of client information. For more details or to place an order, visit our website or contact us directly.</p>
 
       </div>
       <ImageGallery images={images} />

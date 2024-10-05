@@ -21,12 +21,11 @@ function App() {
       <Header
         title="Customized Items"
         imageSrc={prom4}
-        description="SC Graphics and Promotions specializes in high-quality graphic design services,
-         including eye-catching post designs and unique logo creation. Whether you're looking to create
-          a striking social media post, develop a memorable brand identity, or design promotional materials,
-           SC Graphics and Promotions combines creativity with professionalism to bring your vision to life.
-            The shop's website showcases a portfolio of diverse projects, demonstrating expertise in transforming
-             ideas into visually compelling designs that capture the essence of your brand."
+        description="SC Graphics and Promotions specializes in creating high-quality customized items, including unique gifts, elegant wedding cards, personalized name boards,
+         custom mugs, and stylish photo frames. Whether you’re looking to commemorate a special occasion, enhance your brand visibility, or give a thoughtful gift, SC Graphics
+         and Promotions combines creativity and craftsmanship to bring your ideas to life. Our website showcases a diverse portfolio of customized projects, reflecting our
+         dedication to transforming your visions into tangible products that resonate with meaning and style. Let us help you create something special that captures the essence
+         of your brand or celebration."
       />
       <div className='pt-6'>
         <h1 className='font-serif font-bold text-xl md:text-2xl pb-4'>Service Details</h1>
