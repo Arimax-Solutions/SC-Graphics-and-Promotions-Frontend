@@ -14,7 +14,7 @@ export default defineConfig({
     },
   },
   define: {
-    'process.env.VITE_BACKEND_URL': JSON.stringify('http://localhost:8080'),
+    'process.env.VITE_BACKEND_URL': JSON.stringify('http://47.129.152.216:8080'),
   },
   build: {
     rollupOptions: {
