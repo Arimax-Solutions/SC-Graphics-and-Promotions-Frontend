@@ -13,7 +13,7 @@ const SingleItemPage = () => {
   // Fetch the product details based on productId
   const fetchProduct = async () => {
     try {
-      const response = await axios.get(`${backendUrl}/api/v1/products/${productId}`);
+      const response = await axios.get(`/api/v1/products/${productId}`);
       setProduct(response.data);
       setLoading(false);
     } catch (error) {

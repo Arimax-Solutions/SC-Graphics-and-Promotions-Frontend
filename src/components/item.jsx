@@ -14,7 +14,7 @@ const Item = ({ img, price, text, productId }) => {
   const handleClick = async () => {
     try {
       // Call the API to increment the click count
-      await axios.post(`${backendUrl}/api/v1/products/click/count/${productId}`);
+      await axios.post(`/api/v1/products/click/count/${productId}`);
     } catch (error) {
       console.error("Error incrementing click count:", error);
     }

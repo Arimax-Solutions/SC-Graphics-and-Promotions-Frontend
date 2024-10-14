@@ -11,7 +11,7 @@ const ProductDetails = () => {
 
     useEffect(() => {
         const fetchProductDetails = async () => {
-            const response = await fetch(`${backendUrl}/api/v1/products/${id}`);
+            const response = await fetch(`/api/v1/products/${id}`);
             const data = await response.json();
             setProduct(data);
         };

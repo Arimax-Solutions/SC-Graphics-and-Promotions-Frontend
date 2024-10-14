@@ -15,7 +15,7 @@ const SearchResults = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`${backendUrl}/api/v1/products`);
+        const response = await fetch(`/api/v1/products`);
         const data = await response.json();
         setProducts(data); // Store all products in state
       } catch (error) {

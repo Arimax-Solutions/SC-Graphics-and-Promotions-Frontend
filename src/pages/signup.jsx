@@ -22,7 +22,7 @@ function Login() {
     };
 
     try {
-      const response = await fetch(`${backendUrl}/auth/login`, {
+      const response = await fetch(`/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

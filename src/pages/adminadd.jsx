@@ -35,7 +35,7 @@ function AdminTable() {
   const fetchUsers = async () => {
     try {
       //const response = await fetch('http://localhost:8080/auth');
-      const response = await fetch(`${backendUrl}/auth`);
+      const response = await fetch(`/auth/getAll`);
       const result = await response.json();
       if (result.status === 200) {
         setAdmins(result.data);
@@ -84,7 +84,7 @@ function AdminTable() {
     };
 
     try {
-      const response = await fetch(`${backendUrl}/auth/register`, {
+      const response = await fetch(`/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -123,7 +123,7 @@ function AdminTable() {
       };
 
       try {
-        const response = await fetch(`${backendUrl}/auth/${selectedAdmin.user_id}`, {
+        const response = await fetch(`/auth/${selectedAdmin.user_id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -159,7 +159,7 @@ function AdminTable() {
       fetchUsers();
 
       try {
-        const response = await fetch(`${backendUrl}/auth/${selectedAdmin.user_id}`, {
+        const response = await fetch(`/auth/${selectedAdmin.user_id}`, {
           method: 'DELETE',
         });
 
