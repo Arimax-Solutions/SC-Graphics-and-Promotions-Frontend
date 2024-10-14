@@ -156,7 +156,7 @@ const Home = () => {
           />
           <div className="p-4">
             <h3 className="text-lg font-semibold text-gray-900">{product.title || 'Untitled'}</h3>
-            <p className="text-blue-600 text-lg font-bold mt-2">{`Rs. ${product.price.toFixed(2)}`}</p>
+            <p className="text-blue-600 text-lg font-bold mt-2">{`LKR. ${product.price.toFixed(2)}`}</p>
           </div>
         </div>
       </a>

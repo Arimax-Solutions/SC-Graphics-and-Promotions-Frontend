@@ -39,7 +39,7 @@ const Item = ({ img, price, text, productId }) => {
             </div>
           </div>
           <div className="p-4">
-            <h3 className="text-pink-600 text-xl font-bold text-center">{price}</h3>
+            <h3 className="text-pink-600 text-xl font-bold text-center">LKR. {price}</h3>
             <p className="text-gray-700 text-center mt-2 h-12 overflow-hidden text-ellipsis">
               {text}
             </p>

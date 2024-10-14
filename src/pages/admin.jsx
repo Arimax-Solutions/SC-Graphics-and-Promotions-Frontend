@@ -117,6 +117,7 @@ const AdminPage = () => {
         console.log(formData);
         
         response = await axios.put(`/api/v1/products/${productData.id}`, formData);
+        //response = await axios.put(`http://localhost:8080/api/v1/products/${productData.id}`, formData);
 
         if (response.status === 200) {
           const updatedList = productList.map((product) =>

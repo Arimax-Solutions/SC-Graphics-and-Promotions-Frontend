@@ -85,6 +85,19 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
     onSubmit(formData);
   };
 
+  const handleDetailEdit = (e, index, field) => {
+    const updatedDetails = [...formData.details];
+    updatedDetails[index][field] = e.target.value;
+    setFormData({ ...formData, details: updatedDetails });
+  };
+
+  const deleteDetail = (index) => {
+    const updatedDetails = formData.details.filter((_, i) => i !== index);
+    setFormData({ ...formData, details: updatedDetails });
+  };
+
+
+
   return (
     <div className="product-form mt-8 p-6 bg-white rounded-lg shadow-xl flex">
       <div className="w-1/2 p-4 border-r">
@@ -183,7 +196,7 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
           />
 
           {/* Product Details Section */}
-          <div className="mb-4">
+          {/*<div className="mb-4">
             <h3 className="text-lg font-semibold mb-2">Add Product Details</h3>
             <div className="flex gap-4 mb-2">
               <input
@@ -210,7 +223,7 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
                 Add Detail
               </button>
             </div>
-            {/* Display added details */}
+             Display added details
             <ul className="list-disc ml-4">
               {formData.details.map((d, index) => (
                 <li key={index}>
@@ -218,7 +231,64 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
                 </li>
               ))}
             </ul>
+          </div>*/}
+          {/* Product Details Section */}
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold mb-2">Add Product Details</h3>
+            <div className="flex gap-4 mb-2">
+              <input
+                  type="text"
+                  name="label"
+                  value={detail.label}
+                  onChange={handleDetailChange}
+                  placeholder="Detail Label"
+                  className="w-1/2 h-12 p-2 border rounded"
+              />
+              <input
+                  type="text"
+                  name="value"
+                  value={detail.value}
+                  onChange={handleDetailChange}
+                  placeholder="Detail Value"
+                  className="w-1/2 h-12 p-2 border rounded"
+              />
+              <button
+                  type="button"
+                  onClick={addDetail}
+                  className="bg-green-500 text-white p-2 rounded"
+              >
+                Add Detail
+              </button>
+            </div>
+            {/* Display added details as editable fields with delete option */}
+            {formData.details.map((d, index) => (
+                <div key={index} className="flex gap-4 mb-2 items-center">
+                  <input
+                      type="text"
+                      name={`label-${index}`}
+                      value={d.label}
+                      onChange={(e) => handleDetailEdit(e, index, 'label')}
+                      className="w-1/2 h-12 p-2 border rounded"
+                  />
+                  <input
+                      type="text"
+                      name={`value-${index}`}
+                      value={d.value}
+                      onChange={(e) => handleDetailEdit(e, index, 'value')}
+                      className="w-1/2 h-12 p-2 border rounded"
+                  />
+                  <button
+                      type="button"
+                      onClick={() => deleteDetail(index)}
+                      className="bg-red-500 text-white p-2 rounded"
+                  >
+                    Delete
+                  </button>
+                </div>
+            ))}
           </div>
+
+
 
           <button
             type="submit"
