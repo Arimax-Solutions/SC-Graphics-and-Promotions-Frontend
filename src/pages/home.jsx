@@ -39,6 +39,7 @@ const Home = () => {
   const fetchPopularProducts = async () => {
     try {
       const response = await fetch(`/api/v1/products/popular`);
+
       //const response = await fetch(`http://localhost:8080/api/v1/products/popular`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
