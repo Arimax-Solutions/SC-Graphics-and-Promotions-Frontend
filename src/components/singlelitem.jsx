@@ -7,6 +7,7 @@ const SingleItemPage = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const backendUrl = process.env.VITE_BACKEND_URL;
 
@@ -14,6 +15,7 @@ const SingleItemPage = () => {
   const fetchProduct = async () => {
     try {
       const response = await axios.get(`/api/v1/products/${productId}`);
+      //const response = await axios.get(`http://localhost:8080/api/v1/products/${productId}`);
       setProduct(response.data);
       setLoading(false);
     } catch (error) {
@@ -25,6 +27,14 @@ const SingleItemPage = () => {
   useEffect(() => {
     fetchProduct();
   }, [productId]);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   if (loading) {
     return <div className="text-center text-2xl font-bold">Loading...</div>; // Loading indicator
@@ -44,7 +54,8 @@ const SingleItemPage = () => {
             <img
                 src={product.img}
                 alt={product.title}
-                className="w-64 h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 hover:scale-105"
+                className="w-64 h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 cursor-pointer"
+                onClick={openModal}
             />
           </div>
 
@@ -60,8 +71,10 @@ const SingleItemPage = () => {
               </p>
 
               <div className="text-center lg:text-left mb-4">
-                {/*<span className="text-3xl lg:text-4xl font-bold text-red-500">LKR. {product.price}</span>*/}
-                <span className="text-3xl lg:text-4xl font-bold text-red-500">LKR. {(product.price || 0).toFixed(2)}</span>
+              <span className="text-3xl lg:text-4xl font-bold text-red-500">
+                {product.price && product.price > 0 ? `LKR. ${product.price.toFixed(2)}` : 'Customizable Price'}
+              </span>
+
 
               </div>
             </div>
@@ -74,12 +87,11 @@ const SingleItemPage = () => {
                 </button>
               </a>
               <button
-                onClick={() => window.open(product.darazLink, '_blank')}
-                className="flex items-center justify-center w-full lg:w-auto bg-orange-500 text-white font-semibold py-3 px-6 rounded-full hover:bg-orange-600 transition-all shadow-lg"
+                  onClick={() => window.open(product.darazLink, '_blank')}
+                  className="flex items-center justify-center w-full lg:w-auto bg-orange-500 text-white font-semibold py-3 px-6 rounded-full hover:bg-orange-600 transition-all shadow-lg"
               >
                 <FaBox className="mr-2" /> Order Now
               </button>
-
             </div>
 
             {/* Social Media Links */}
@@ -93,9 +105,6 @@ const SingleItemPage = () => {
               <a href="https://www.tiktok.com/@scgraphicsandpromotions?_t=8pGceF53oKT&_r=1" target="_blank" rel="noopener noreferrer" className="bg-black text-white p-3 rounded-full hover:bg-gray-800 transition-colors">
                 <FaTiktok />
               </a>
-              {/*<a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="bg-blue-400 text-white p-3 rounded-full hover:bg-blue-500 transition-colors">
-                <FaTwitter />
-              </a>*/}
             </div>
           </div>
         </div>
@@ -113,6 +122,25 @@ const SingleItemPage = () => {
             ))}
           </ul>
         </div>
+
+        {/* Image Modal */}
+        {isModalOpen && (
+            <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-75">
+              <div className="relative p-4 bg-white rounded-lg shadow-lg">
+                <button
+                    onClick={closeModal}
+                    className="absolute top-2 right-2 text-gray-700 bg-gray-200 rounded-full p-2 hover:bg-gray-300 transition-colors"
+                >
+                  &times;
+                </button>
+                <img
+                    src={product.img}
+                    alt={product.title}
+                    className="w-full h-auto max-w-3xl object-cover rounded-lg"
+                />
+              </div>
+            </div>
+        )}
       </div>
   );
 };

@@ -25,6 +25,7 @@ const ShoppingPage = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(`/api/v1/products`);
+      //const response = await axios.get(`http://localhost:8080/api/v1/products`);
       setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);

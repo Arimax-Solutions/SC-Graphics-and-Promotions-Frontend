@@ -108,6 +108,7 @@ const AdminPage = () => {
 
       if (isAddingNew) {
         response = await axios.post(`/api/v1/products`, formData);
+        //response = await axios.post(`http://localhost:8080/api/v1/products`, formData);
 
         if (response.status === 200) {
           setProductList([...productList, response.data]); // Update the product list

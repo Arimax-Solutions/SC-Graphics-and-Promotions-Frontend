@@ -39,6 +39,7 @@ const Home = () => {
   const fetchPopularProducts = async () => {
     try {
       const response = await fetch(`/api/v1/products/popular`);
+      //const response = await fetch(`http://localhost:8080/api/v1/products/popular`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -157,7 +158,10 @@ const Home = () => {
           <div className="p-4">
             <h3 className="text-lg font-semibold text-gray-900">{product.title || 'Untitled'}</h3>
             {/*<p className="text-blue-600 text-lg font-bold mt-2">{`LKR. ${product.price.toFixed(2)}`}</p>*/}
-              <p className="text-blue-600 text-lg font-bold mt-2">{`LKR. ${(product.price || 0).toFixed(2)}`}</p>
+            {/*  <p className="text-blue-600 text-lg font-bold mt-2">{`LKR. ${(product.price || 0).toFixed(2)}`}</p>*/}
+              <p className="text-blue-600 text-lg font-bold mt-2">
+                  {product.price && product.price > 0 ? `LKR. ${product.price.toFixed(2)}` : 'Customizable Price'}
+              </p>
 
           </div>
         </div>
