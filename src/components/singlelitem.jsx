@@ -60,7 +60,9 @@ const SingleItemPage = () => {
               </p>
 
               <div className="text-center lg:text-left mb-4">
-                <span className="text-3xl lg:text-4xl font-bold text-red-500">LKR. {product.price}</span>
+                {/*<span className="text-3xl lg:text-4xl font-bold text-red-500">LKR. {product.price}</span>*/}
+                <span className="text-3xl lg:text-4xl font-bold text-red-500">LKR. {(product.price || 0).toFixed(2)}</span>
+
               </div>
             </div>
 
